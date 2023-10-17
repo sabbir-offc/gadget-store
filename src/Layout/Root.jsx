@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 
 const Root = () => {
   return (
-    <div>
+    <div className="font-fira">
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Toaster></Toaster>

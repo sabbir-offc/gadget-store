@@ -5,6 +5,7 @@ import "./index.css";
 import Root from "./Layout/Root";
 import Home from "./Pages/Home";
 import AuthProvider from "./Provider/AuthProvider";
+import Login from "./Pages/Auth/Login";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/signin",
+        element: <Login></Login>,
       },
     ],
   },
