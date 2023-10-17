@@ -2,10 +2,12 @@ import { updateProfile } from "firebase/auth";
 import useAuth from "../../hook/useAuth";
 import SocialLogin from "./SocialLogin";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../firebase/firebase.config";
 
 const SignUp = () => {
-  const { createUser, user } = useAuth();
+  const { createUser } = useAuth();
+  const navigate = useNavigate();
   const handleCreateUser = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -18,8 +20,9 @@ const SignUp = () => {
     createUser(email, password)
       .then((res) => {
         console.log(res.user);
-        updateProfile(user, { displayName: name, photoURL: photo });
+        updateProfile(auth.currentUser, { displayName: name, photoURL: photo });
         toast.success("Account Created Successfully.");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
