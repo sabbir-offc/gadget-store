@@ -1,8 +1,26 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import useAuth from "../hook/useAuth";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const { user, logOut } = useAuth();
+  const handleLogOut = () => {
+    logOut();
+  };
+  const links = (
+    <>
+      <NavLink className="px-4 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-blue-600 focus:outline-none focus:shadow-outline">
+        Home
+      </NavLink>
+      <NavLink className="px-4 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-blue-600 focus:outline-none focus:shadow-outline">
+        Add Product
+      </NavLink>
+      <NavLink className="px-4 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-blue-600 focus:outline-none focus:shadow-outline">
+        My Cart
+      </NavLink>
+    </>
+  );
   return (
     <div className="w-full max-w-7xl mx-auto">
       <div className="flex flex-col max-w-screen-xl p-5 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
@@ -34,23 +52,31 @@ const Navbar = () => {
             open ? "flex" : "hidden"
           } md:items-center flex-grow md:justify-end md:flex-row lg:border-l-2 lg:pl-2`}
         >
-          <NavLink className="px-4 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-blue-600 focus:outline-none focus:shadow-outline">
-            Home
-          </NavLink>
-          <NavLink className="px-4 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-blue-600 focus:outline-none focus:shadow-outline">
-            Add Product
-          </NavLink>
-          <NavLink className="px-4 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-blue-600 focus:outline-none focus:shadow-outline">
-            My Cart
-          </NavLink>
+          {links}
 
           <div className="inline-flex items-center gap-2 list-none lg:ml-auto">
-            <NavLink
-              to="/signin"
-              className="items-center block px-10 py-2.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-            >
-              Sign in
-            </NavLink>
+            {user ? (
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img src={user?.photoURL} />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>{user?.displayName}</li>
+                  <button onClick={handleLogOut} className="btn mt-3">
+                    Sign Out
+                  </button>
+                </ul>
+              </div>
+            ) : (
+              <NavLink to="/signin" className="border px-3 py-2 rounded">
+                Sign in
+              </NavLink>
+            )}
           </div>
         </nav>
       </div>
