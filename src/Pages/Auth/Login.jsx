@@ -1,6 +1,22 @@
 import { Link } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
+import useAuth from "../../hook/useAuth";
+import toast from "react-hot-toast";
 const Login = () => {
+  const { loginUser } = useAuth();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    loginUser(email, password)
+      .then(() => {
+        toast.success("Login SuccessFull.");
+      })
+      .catch((err) => {
+        toast.error(`Login Failed due to ${err.message}`);
+      });
+  };
   return (
     <section>
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
@@ -16,41 +32,43 @@ const Login = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="mt-6 space-y-4">
-                <div>
-                  <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    className="block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-500 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
-                    placeholder="Enter your email"
-                  />
+              <form onSubmit={handleLogin}>
+                <div className="mt-6 space-y-4">
+                  <div>
+                    <input
+                      type="text"
+                      name="email"
+                      id="email"
+                      className="block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-500 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      className="block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-500 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                      placeholder="Enter your password"
+                    />
+                  </div>
+                  <div className="flex flex-col mt-4 lg:space-y-2">
+                    <button
+                      type="submit"
+                      className="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    >
+                      Sign In
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <input
-                    type="text"
-                    name="password"
-                    id="password"
-                    className="block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-500 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
-                    placeholder="Enter your password"
-                  />
-                </div>
-                <div className="flex flex-col mt-4 lg:space-y-2">
-                  <button
-                    type="button"
-                    className="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                  >
-                    Sign In
-                  </button>
-                </div>
-                <div className="flex justify-between items-center my-5">
-                  <p>{`Don't have an account?`}</p>
-                  <Link className="text-blue-500 underline" to="/signup">
-                    Sign Up
-                  </Link>
-                </div>
+              </form>
+              <div className="flex justify-between items-center my-5">
+                <p>{`Don't have an account?`}</p>
+                <Link className="text-blue-500 underline" to="/signup">
+                  Sign Up
+                </Link>
               </div>
+
               <SocialLogin></SocialLogin>
             </div>
             <div className="order-first hidden w-full lg:block">
