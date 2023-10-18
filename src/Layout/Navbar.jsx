@@ -1,10 +1,17 @@
+import toast from "react-hot-toast";
 import useAuth from "../hook/useAuth";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const handleLogOut = () => {
-    logOut();
+    logOut()
+      .then(() => {
+        toast.success("Log Out Successfull.");
+      })
+      .catch(() => {
+        toast.error("Log Out Failed.");
+      });
   };
   const links = (
     <>
@@ -75,25 +82,52 @@ const Navbar = () => {
         </div>
         <img src="/logo.png" className="w-20 h-20" alt="" />
         <a className="font-semibold border-l-2 pl-2 border-l-blue-700 normal-case text-xl">
-          Tech Gadget
+          Gadget Store
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-4">{links}</ul>
       </div>
       <div className="navbar-end">
-        <NavLink
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending"
-              : isActive
-              ? "px-3 py-2 text-blue-600 text-lg border-2 border-blue-600 rounded"
-              : "px-3 py-2 text-lg rounded bg-black text-white font-medium"
-          }
-          to="/signin"
-        >
-          Sign In
-        </NavLink>
+        {user ? (
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img src={user.photoURL} />
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <p>{user.displayName}</p>
+              </li>
+
+              <li>
+                <button
+                  className="bg-blue-700 py-2 text-white hover:bg-blue-800 hover:text-white"
+                  onClick={handleLogOut}
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "px-3 py-2 text-blue-600 text-lg border-2 border-blue-600 rounded"
+                : "px-3 py-2 text-lg rounded bg-black text-white font-medium"
+            }
+            to="/signin"
+          >
+            Sign In
+          </NavLink>
+        )}
       </div>
     </div>
   );

@@ -8,6 +8,9 @@ export default {
     extend: {
       fontFamily: {
         "fira": "'Fira Sans', sans-serif"
+      },
+      backgroundImage: {
+        'hero-bg': "url('/banner1.jpg')",
       }
     },
   },
