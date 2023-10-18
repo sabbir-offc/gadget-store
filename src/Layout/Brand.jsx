@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Brand = ({ brand }) => {
   useEffect(() => {
@@ -21,10 +22,11 @@ const Brand = ({ brand }) => {
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-5xl">
             <h1 className="mb-5 text-5xl font-bold">{title}</h1>
-
-            <button className="p-3 bg-blue-700 font-medium rounded">
-              See Product
-            </button>
+            <Link to={`/brand-products/${title}`}>
+              <button className="p-3 bg-blue-700 font-medium rounded">
+                See Product
+              </button>
+            </Link>
           </div>
         </div>
       </div>

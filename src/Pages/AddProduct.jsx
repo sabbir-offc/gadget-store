@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
   const [formData, setFormData] = useState({
@@ -49,7 +50,10 @@ const AddProduct = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data.acknowledged) {
+          toast.success("Product Added Successfull.");
+          form.reset();
+        }
       });
   };
   return (
@@ -74,6 +78,7 @@ const AddProduct = () => {
                   type="text"
                   name="image"
                   placeholder="Image"
+                  required
                   className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
               </div>
@@ -86,6 +91,7 @@ const AddProduct = () => {
                   type="text"
                   name="productName"
                   placeholder="Product name"
+                  required
                   className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
               </div>
@@ -98,6 +104,7 @@ const AddProduct = () => {
                   type="text"
                   name="brandName"
                   placeholder="Brand Name"
+                  required
                   className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
               </div>
@@ -113,6 +120,12 @@ const AddProduct = () => {
                   <option value="Phone">Phone</option>
                   <option value="Computer">Computer</option>
                   <option value="TV">TV</option>
+                  <option value="Buds">Buds</option>
+                  <option value="Camera">Camera</option>
+                  <option value="Monitor">Monitor</option>
+                  <option value="Laptop">Laptop</option>
+                  <option value="Tab">Tab</option>
+                  <option value="Watch">Watch</option>
                 </select>
               </div>
               <div className="col-span-full sm:col-span-2">
@@ -124,6 +137,7 @@ const AddProduct = () => {
                   type="text"
                   name="price"
                   placeholder="Product Price"
+                  required
                   className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
               </div>
@@ -135,6 +149,7 @@ const AddProduct = () => {
                   id="description"
                   name="description"
                   type="text"
+                  required
                   placeholder="Type Description for product"
                   cols={8}
                   rows={2}
