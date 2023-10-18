@@ -6,6 +6,7 @@ import SignUp from "../Pages/Auth/SignUp";
 import AddProduct from "../Pages/AddProduct";
 import PrivateRoutes from "./PrivateRoutes";
 import BrandProducts from "../Pages/BrandProducts";
+import AdvertiseSend from "../Pages/AdvertiseSend";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         element: <BrandProducts></BrandProducts>,
         loader: ({ params }) =>
           fetch(`http://localhost:5001/brands/${params.brand}`),
+      },
+      {
+        path: "/ad",
+        element: <AdvertiseSend></AdvertiseSend>,
       },
     ],
   },
