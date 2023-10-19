@@ -1,16 +1,22 @@
 import PropTypes from "prop-types";
-import Rating from "../Layout/Rating";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-
-const Product = ({ product }) => {
+import Rating from "react-rating";
+const BrandProduct = ({ product }) => {
   useEffect(() => {
+    //aos
     AOS.init();
+    //scrolling to the top
     window.scroll(0, 0);
   }, []);
-  const { image, productName, brandName, price, productType, rating } = product;
+  //rating size
+  const ratingSize = 1.5;
+
+  //product details
+  const { _id, image, productName, brandName, price, productType, rating } =
+    product;
   return (
     <div
       data-aos="fade-up-right"
@@ -30,10 +36,25 @@ const Product = ({ product }) => {
       </div>
       <p className="text-xl font-semibold">Category: {productType}</p>
       <div className="flex items-center gap-2 mt-2">
-        <h5 className="text-lg font-medium mt-1">Rating:</h5>{" "}
-        <Rating rating={parseInt(rating)} />
+        <h5 className="text-lg font-medium ">Rating:</h5>
+        <Rating
+          initialRating={rating}
+          emptySymbol={
+            <i
+              className="far fa-star fa-1.5x"
+              style={{ fontSize: `${ratingSize}em`, color: "lightgray" }}
+            />
+          }
+          fullSymbol={
+            <i
+              className="fas fa-star fa-1.5x"
+              style={{ fontSize: `${ratingSize}em`, color: "skyblue" }}
+            />
+          }
+          readonly
+        />
       </div>
-      <Link>
+      <Link to={`/products/${_id}`}>
         <button className="bg-[#4D2DB7] p-3 text-white font-semibold rounded mt-3">
           Show Details
         </button>
@@ -42,7 +63,7 @@ const Product = ({ product }) => {
   );
 };
 
-Product.propTypes = {
+BrandProduct.propTypes = {
   product: PropTypes.object,
 };
-export default Product;
+export default BrandProduct;

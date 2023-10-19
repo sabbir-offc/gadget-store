@@ -7,11 +7,15 @@ import AddProduct from "../Pages/AddProduct";
 import PrivateRoutes from "./PrivateRoutes";
 import BrandProducts from "../Pages/BrandProducts";
 import AdvertiseSend from "../Pages/AdvertiseSend";
+import Error from "../Pages/Error";
+import ProductDetails from "../Pages/ProductDetails";
+import MyCart from "../Pages/MyCart";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -43,6 +47,22 @@ const router = createBrowserRouter([
       {
         path: "/ad",
         element: <AdvertiseSend></AdvertiseSend>,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetails></ProductDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5001/products/${params.id}`),
+      },
+      {
+        path: "/my-cart/:email",
+        element: (
+          <PrivateRoutes>
+            <MyCart></MyCart>
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5001/user-cart/${params.email}`),
       },
     ],
   },

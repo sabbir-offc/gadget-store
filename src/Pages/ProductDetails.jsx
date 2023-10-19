@@ -1,0 +1,113 @@
+import { useLoaderData } from "react-router-dom";
+import Rating from "react-rating";
+import useAuth from "../hook/useAuth";
+import Swal from "sweetalert2";
+import { useEffect } from "react";
+const ProductDetails = () => {
+  const product = useLoaderData();
+  const { user } = useAuth();
+  const windowScoll = 0;
+  useEffect(() => {
+    window.scroll(0, windowScoll);
+  }, [windowScoll]);
+  const {
+    productName,
+    brandName,
+    rating,
+    image,
+    description,
+    productType,
+    price,
+  } = product;
+
+  //rating size
+  const ratingSize = 1.5;
+
+  //product cart button
+
+  const handleAddCart = () => {
+    const cartProduct = {
+      productName,
+      brandName,
+      rating,
+      image,
+      productType,
+      price,
+      userEmail: user.email,
+      userName: user.displayName,
+    };
+    fetch(`http://localhost:5001/user-cart`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(cartProduct),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          Swal.fire(
+            "Thank you!",
+            "Your product added successfully to your cart.",
+            "success"
+          );
+        }
+      });
+  };
+  return (
+    <div className="container mx-auto bg-base-100 shadow-lg my-10">
+      <div className="grid md:grid-cols-5 py-5 bg-gray-100 rounded-md">
+        <div className="md:col-span-3">
+          <img
+            src={image}
+            alt={`image of the ${productName}`}
+            className="w-2/4 mx-auto"
+          />
+        </div>
+        <div className=" space-y-4 text-center flex flex-col justify-center md:text-left p-4 h-full md:col-span-2">
+          <h2 className="text-2xl md:text-4xl">{productName}</h2>
+          <div className="flex items-center justify-center md:justify-start gap-3">
+            <p className="text-lg">Rating: </p>
+            <Rating
+              initialRating={rating}
+              emptySymbol={
+                <i
+                  className="far fa-star fa-1.5x"
+                  style={{ fontSize: `${ratingSize}em`, color: "lightgray" }}
+                />
+              }
+              fullSymbol={
+                <i
+                  className="fas fa-star fa-1.5x"
+                  style={{ fontSize: `${ratingSize}em`, color: "#FF4B91" }}
+                />
+              }
+              readonly
+            />
+          </div>
+          <p className="text-lg">
+            Brand:
+            <span className="font-bold"> {brandName}</span>
+          </p>
+          <p className="text-lg text-[#0802A3]">৳ {price}</p>
+          <p className="text-lg">
+            Category: <span className="font-medium">{productType}</span>
+          </p>
+          <button
+            onClick={handleAddCart}
+            className="bg-blue-700 w-fit text-white px-4 py-3 rounded-tl-lg rounded-br-lg font-semibold"
+          >
+            Add To Cart
+          </button>
+        </div>
+      </div>
+
+      <div className="bg-gray-100 px-2 py-3 mt-5">
+        <p className="text-xl font-bold mb-4">Description:</p>
+        <p className="text-lg">{description}</p>
+      </div>
+    </div>
+  );
+};
+
+export default ProductDetails;
