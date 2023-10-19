@@ -54,11 +54,18 @@ const BrandProduct = ({ product }) => {
           readonly
         />
       </div>
-      <Link to={`/products/${_id}`}>
-        <button className="bg-[#4D2DB7] p-3 text-white font-semibold rounded mt-3">
-          Show Details
-        </button>
-      </Link>
+      <div className="flex items-center gap-5">
+        <Link to={`/products/${_id}`}>
+          <button className="bg-[#4D2DB7] p-3 text-white font-semibold rounded mt-3">
+            Show Details
+          </button>
+        </Link>
+        <Link to={`/update/${_id}`}>
+          <button className="bg-[#FF4B91] p-3 text-white font-semibold rounded mt-3">
+            Update
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

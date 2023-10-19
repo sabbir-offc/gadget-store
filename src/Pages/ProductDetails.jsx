@@ -24,7 +24,6 @@ const ProductDetails = () => {
   const ratingSize = 1.5;
 
   //product cart button
-
   const handleAddCart = () => {
     const cartProduct = {
       productName,
@@ -38,23 +37,29 @@ const ProductDetails = () => {
       userName: user?.displayName,
       userId: user?.uid,
     };
-    fetch(`http://localhost:5001/user-cart`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(cartProduct),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          Swal.fire(
-            "Thank you!",
-            "Your product added successfully to your cart.",
-            "success"
-          );
-        }
-      });
+    user
+      ? fetch(`http://localhost:5001/user-cart`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(cartProduct),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.acknowledged) {
+              Swal.fire(
+                "Thank you!",
+                "Your product added successfully to your cart.",
+                "success"
+              );
+            }
+          })
+      : Swal.fire(
+          "Error!",
+          "You need to login your account for adding a product ",
+          "error"
+        );
   };
   return (
     <div className="container mx-auto bg-base-100 shadow-lg my-10">

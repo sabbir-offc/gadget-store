@@ -10,6 +10,7 @@ import AdvertiseSend from "../Pages/AdvertiseSend";
 import Error from "../Pages/Error";
 import ProductDetails from "../Pages/ProductDetails";
 import MyCart from "../Pages/MyCart";
+import UpdateProduct from "../Pages/UpdateProduct";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,16 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5001/user-cart/${params.userId}`),
+      },
+      {
+        path: "/update/:id",
+        element: (
+          <PrivateRoutes>
+            <UpdateProduct></UpdateProduct>
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5001/products/${params.id}`),
       },
     ],
   },

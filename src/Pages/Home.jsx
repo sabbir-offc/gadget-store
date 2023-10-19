@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Banner from "../Layout/Banner";
 import Brands from "../Layout/Brands";
+import Feature from "../Layout/Feature";
 
 const Home = () => {
   useEffect(() => {
@@ -15,6 +16,7 @@ const Home = () => {
         </h3>
         <Brands></Brands>
       </div>
+      <Feature></Feature>
     </div>
   );
 };
