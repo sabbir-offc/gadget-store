@@ -31,6 +31,7 @@ const ProductDetails = () => {
       brandName,
       rating,
       image,
+      description,
       productType,
       price,
       userEmail: user?.email,
