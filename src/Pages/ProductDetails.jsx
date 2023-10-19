@@ -33,8 +33,9 @@ const ProductDetails = () => {
       image,
       productType,
       price,
-      userEmail: user.email,
-      userName: user.displayName,
+      userEmail: user?.email,
+      userName: user?.displayName,
+      userId: user?.uid,
     };
     fetch(`http://localhost:5001/user-cart`, {
       method: "POST",

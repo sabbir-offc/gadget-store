@@ -39,18 +39,20 @@ const Navbar = () => {
       >
         Add Product
       </NavLink>
-      <NavLink
-        className={({ isActive, isPending }) =>
-          isPending
-            ? "pending"
-            : isActive
-            ? "px-3 py-2 text-blue-600 text-lg border-2 border-blue-600 rounded"
-            : "px-3 py-2 text-black text-lg"
-        }
-        to={`/my-cart/${user.email}`}
-      >
-        My Cart
-      </NavLink>
+      {user && (
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "px-3 py-2 text-blue-600 text-lg border-2 border-blue-600 rounded"
+              : "px-3 py-2 text-black text-lg"
+          }
+          to={`/my-cart/${user?.uid}`}
+        >
+          My Cart
+        </NavLink>
+      )}
     </>
   );
   return (

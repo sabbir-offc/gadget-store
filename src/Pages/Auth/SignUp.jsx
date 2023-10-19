@@ -15,13 +15,29 @@ const SignUp = () => {
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    const newUser = { name, photo, email, password };
-    console.log(newUser);
+
     createUser(email, password)
       .then((res) => {
-        console.log(res.user);
         updateProfile(auth.currentUser, { displayName: name, photoURL: photo });
         toast.success("Account Created Successfully.");
+        const user = res.user;
+        const userInfo = {
+          email: user?.email,
+          userName: name,
+          image: photo,
+          userId: user?.uid,
+        };
+        fetch("http://localhost:5001/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
         navigate("/");
       })
       .catch((err) => {

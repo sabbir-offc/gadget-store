@@ -55,14 +55,14 @@ const router = createBrowserRouter([
           fetch(`http://localhost:5001/products/${params.id}`),
       },
       {
-        path: "/my-cart/:email",
+        path: "/my-cart/:userId",
         element: (
           <PrivateRoutes>
             <MyCart></MyCart>
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5001/user-cart/${params.email}`),
+          fetch(`http://localhost:5001/user-cart/${params.userId}`),
       },
     ],
   },
