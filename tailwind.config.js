@@ -4,8 +4,13 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+
   theme: {
     extend: {
+      textColor: {
+        light: "#000",
+        dark: "#fff",
+      },
       fontFamily: {
         "fira": "'Fira Sans', sans-serif"
       },
@@ -15,5 +20,6 @@ export default {
     },
   },
   plugins: [require("daisyui")],
+
 }
 

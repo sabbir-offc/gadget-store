@@ -25,7 +25,7 @@ const BrandProduct = ({ product }) => {
       <img
         src={image}
         alt={`image of this product ${productName}`}
-        className="h-52"
+        className="h-52 mb-3"
       />
       <h2 className="text-2xl md:text-3xl text-center font-semibold">
         {productName}

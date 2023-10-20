@@ -36,12 +36,14 @@ const Slider = () => {
         onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={() => console.log("slide change")}
       >
-        {ads &&
-          ads.map((ad) => (
-            <SwiperSlide key={ad._id}>
-              <img src={ad.image} alt="" className="w-full" />
-            </SwiperSlide>
-          ))}
+        <div className="h-[20vh]">
+          {ads &&
+            ads.map((ad) => (
+              <SwiperSlide key={ad._id}>
+                <img src={ad.image} alt="" className="w-fit mx-auto" />
+              </SwiperSlide>
+            ))}
+        </div>
       </Swiper>
     </div>
   );

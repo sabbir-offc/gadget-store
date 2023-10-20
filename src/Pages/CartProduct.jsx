@@ -38,13 +38,13 @@ const CartProduct = ({ product, products, setProducts }) => {
     });
   };
   return (
-    <div className="flex max-w-md overflow-hidden bg-white rounded-lg shadow-lg">
+    <div className="flex flex-col lg:flex-row max-w-md overflow-hidden items-center rounded-lg shadow-lg">
       <div className="w-1/3">
         <img src={image} alt="" />
       </div>
       <div className="w-2/3 p-4">
-        <h1 className="text-2xl font-bold text-gray-900">{productName}</h1>
-        <p className="mt-2 text-sm text-gray-600">
+        <h1 className="text-2xl font-bold">{productName}</h1>
+        <p className="mt-2 text-sm ">
           {description && description.slice(0, 80)}
         </p>
         <div className="flex items-center my-2 justify-center md:justify-start gap-3">
@@ -67,7 +67,7 @@ const CartProduct = ({ product, products, setProducts }) => {
           />
         </div>
         <div className="flex justify-between mt-3 item-center">
-          <h1 className="text-xl font-bold mt-1 text-gray-700">৳{price}</h1>
+          <h1 className="text-xl font-bold mt-1 ">৳{price}</h1>
           <button
             onClick={() => handleDelete(_id)}
             className="px-3 py-2 text-base font-bold bg-blue-700 text-white  rounded"

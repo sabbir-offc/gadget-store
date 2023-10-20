@@ -7,9 +7,12 @@ const BrandProducts = () => {
   const brandProducts = useLoaderData();
 
   return (
-    <div>
-      <div className="container mx-auto text-center">
-        <Slider></Slider>
+    <div className="container mx-auto">
+      <div className="mb-10">
+        <h2 className="text-2xl font-semibold ml-5 my-8">Advertisement</h2>
+        <div className="mx-auto text-center">
+          <Slider></Slider>
+        </div>
       </div>
       {brandProducts.length > 0 ? (
         <div className="grid md:grid-cols-2 my-10 gap-5 place-items-center">

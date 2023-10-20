@@ -62,8 +62,8 @@ const ProductDetails = () => {
         );
   };
   return (
-    <div className="container mx-auto bg-base-100 shadow-lg my-10">
-      <div className="grid md:grid-cols-5 py-5 bg-gray-100 rounded-md">
+    <div className="container mx-auto shadow-lg my-10">
+      <div className="grid md:grid-cols-5 py-5 rounded-md">
         <div className="md:col-span-3">
           <img
             src={image}
@@ -96,7 +96,7 @@ const ProductDetails = () => {
             Brand:
             <span className="font-bold"> {brandName}</span>
           </p>
-          <p className="text-lg text-[#0802A3]">৳ {price}</p>
+          <p className="text-lg text-[#6f6bd6]">৳ {price}</p>
           <p className="text-lg">
             Category: <span className="font-medium">{productType}</span>
           </p>
@@ -109,7 +109,7 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      <div className="bg-gray-100 px-2 py-3 mt-5">
+      <div className=" px-2 py-3 mt-5">
         <p className="text-xl font-bold mb-4">Description:</p>
         <p className="text-lg">{description}</p>
       </div>

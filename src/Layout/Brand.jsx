@@ -23,7 +23,7 @@ const Brand = ({ brand }) => {
           <div className="max-w-5xl">
             <h1 className="mb-5 text-5xl font-bold">{title}</h1>
             <Link to={`/brand-products/${title}`}>
-              <button className="p-3 bg-blue-700 font-medium rounded">
+              <button className="p-3 bg-blue-700 text-white font-medium rounded">
                 See Product
               </button>
             </Link>
