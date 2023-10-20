@@ -43,7 +43,9 @@ const router = createBrowserRouter([
         path: "/brand-products/:brand",
         element: <BrandProducts></BrandProducts>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5001/brands/${params.brand}`),
+          fetch(
+            `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/brands/${params.brand}`
+          ),
       },
       {
         path: "/ad",
@@ -57,7 +59,9 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5001/products/${params.id}`),
+          fetch(
+            `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
+          ),
       },
       {
         path: "/my-cart/:userId",
@@ -67,7 +71,9 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5001/user-cart/${params.userId}`),
+          fetch(
+            `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/user-cart/${params.userId}`
+          ),
       },
       {
         path: "/update/:id",
@@ -77,7 +83,9 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5001/products/${params.id}`),
+          fetch(
+            `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
+          ),
       },
     ],
   },

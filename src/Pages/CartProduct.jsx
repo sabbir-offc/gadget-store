@@ -19,9 +19,12 @@ const CartProduct = ({ product, products, setProducts }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5001/user-cart/${user?.uid}/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/user-cart/${user?.uid}/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {

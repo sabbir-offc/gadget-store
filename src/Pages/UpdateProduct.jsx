@@ -25,13 +25,16 @@ const UpdateProduct = () => {
       price,
       rating,
     };
-    fetch(`http://localhost:5001/products/${_id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateProduct),
-    })
+    fetch(
+      `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/products/${_id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updateProduct),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
@@ -41,13 +44,13 @@ const UpdateProduct = () => {
   };
   return (
     <div className="my-20">
-      <section className="max-w-4xl p-6 mx-auto bg-gray-800  rounded-md shadow-md">
-        <h2 className="text-lg mb-5 font-semibold  text-gray-50 capitalize ">
+      <section className="max-w-4xl p-6 mx-auto   rounded-md shadow-md">
+        <h2 className="text-lg mb-5 font-semibold   capitalize ">
           Update Product Details
         </h2>
 
         <form onSubmit={handleUpdate}>
-          <div className="grid grid-cols-6 text-gray-50 gap-4 col-span-full lg:col-span-3">
+          <div className="grid grid-cols-6  gap-4 col-span-full lg:col-span-3">
             <div className="col-span-full sm:col-span-3">
               <label htmlFor="image" className="text-sm">
                 Image
@@ -59,7 +62,7 @@ const UpdateProduct = () => {
                 placeholder="Image"
                 required
                 defaultValue={image}
-                className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                className="w-full border border-blue-700 p-3 rounded-md focus:ring focus:ri focus:ri "
               />
             </div>
             <div className="col-span-full sm:col-span-3">
@@ -73,7 +76,7 @@ const UpdateProduct = () => {
                 placeholder="Product name"
                 required
                 defaultValue={productName}
-                className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                className="w-full border border-blue-700 p-3 rounded-md focus:ring focus:ri focus:ri "
               />
             </div>
             <div className="col-span-full sm:col-span-3">
@@ -87,14 +90,14 @@ const UpdateProduct = () => {
                 placeholder="Brand Name"
                 required
                 defaultValue={brandName}
-                className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                className="w-full border border-blue-700 p-3 rounded-md focus:ring focus:ri focus:ri "
               />
             </div>
             <div className="col-span-full">
               <select
-                value={productType}
+                defaultValue={productType}
                 onChange={(e) => setProductType(e.target.value)}
-                className="select select-ghost w-full max-w-xs"
+                className="select border border-blue-700 select-ghost w-full max-w-xs"
               >
                 <option disabled value="">
                   Product Type
@@ -121,7 +124,7 @@ const UpdateProduct = () => {
                 placeholder="Product Price"
                 required
                 defaultValue={price}
-                className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                className="w-full p-3 border border-blue-700 rounded-md focus:ring focus:ri focus:ri "
               />
             </div>
             <div className="col-span-full sm:col-span-2">
@@ -135,7 +138,7 @@ const UpdateProduct = () => {
                 name="rating"
                 placeholder="Product Rating"
                 required
-                className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                className="w-full p-3 rounded-md focus:ring focus:ri focus:ri border border-blue-700"
               />
             </div>
           </div>

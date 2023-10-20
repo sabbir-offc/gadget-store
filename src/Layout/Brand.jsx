@@ -1,19 +1,13 @@
 import PropTypes from "prop-types";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
+
 import { Link } from "react-router-dom";
 
 const Brand = ({ brand }) => {
-  useEffect(() => {
-    AOS.init();
-  }, []);
   const { title, image } = brand;
   return (
     <div>
       <div
-        data-aos="zoom-out-up"
-        className="hero min-h-[30vh] min-w-[50vh] md:min-w-[40vh]"
+        className="hero min-h-[30vh] min-w-[35vh] md:min-w-[40vh]"
         style={{
           backgroundImage: `url(${image})`,
         }}

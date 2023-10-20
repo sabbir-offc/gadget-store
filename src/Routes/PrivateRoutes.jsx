@@ -1,10 +1,13 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hook/useAuth";
 import RiseLoader from "react-spinners/RiseLoader";
 import PropTypes from "prop-types";
 
 const PrivateRoutes = ({ children }) => {
   const { user, loading } = useAuth();
+  const location = useLocation();
+  console.log(location);
+  console.log(location.state);
   if (loading) {
     return (
       <div className="h-screen flex items-center justify-center">
@@ -15,7 +18,7 @@ const PrivateRoutes = ({ children }) => {
   if (user) {
     return children;
   }
-  return <Navigate to="/signin"></Navigate>;
+  return <Navigate state={location.pathname} to="/signin"></Navigate>;
 };
 
 PrivateRoutes.propTypes = {

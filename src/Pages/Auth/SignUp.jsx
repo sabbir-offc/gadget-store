@@ -44,13 +44,16 @@ const SignUp = () => {
           image: photo,
           userId: user?.uid,
         };
-        fetch("http://localhost:5001/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(userInfo),
-        })
+        fetch(
+          "https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/users",
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(userInfo),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

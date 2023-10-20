@@ -38,13 +38,16 @@ const ProductDetails = () => {
       userId: user?.uid,
     };
     user
-      ? fetch(`http://localhost:5001/user-cart`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(cartProduct),
-        })
+      ? fetch(
+          `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/user-cart`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(cartProduct),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.acknowledged) {
@@ -96,20 +99,20 @@ const ProductDetails = () => {
             Brand:
             <span className="font-bold"> {brandName}</span>
           </p>
-          <p className="text-lg text-[#6f6bd6]">৳ {price}</p>
+          <p className="text-lg text-blue-400 font-bold">৳ {price}</p>
           <p className="text-lg">
             Category: <span className="font-medium">{productType}</span>
           </p>
           <button
             onClick={handleAddCart}
-            className="bg-blue-700 w-fit text-white px-4 py-3 rounded-tl-lg rounded-br-lg font-semibold"
+            className="bg-blue-700 mx-auto md:mx-0 w-fit text-white px-4 py-3 rounded-tl-lg rounded-br-lg font-semibold"
           >
             Add To Cart
           </button>
         </div>
       </div>
 
-      <div className=" px-2 py-3 mt-5">
+      <div className="px-5 py-3 mt-5">
         <p className="text-xl font-bold mb-4">Description:</p>
         <p className="text-lg">{description}</p>
       </div>

@@ -41,13 +41,16 @@ const AddProduct = () => {
       description,
       rating,
     };
-    fetch("http://localhost:5001/products", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(productInfo),
-    })
+    fetch(
+      "https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/products",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(productInfo),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

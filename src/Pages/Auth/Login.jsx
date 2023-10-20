@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import useAuth from "../../hook/useAuth";
 import toast from "react-hot-toast";
 const Login = () => {
   const { loginUser } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -12,6 +14,7 @@ const Login = () => {
     loginUser(email, password)
       .then(() => {
         toast.success("Login SuccessFull.");
+        navigate(location.state ? location.state : "/");
       })
       .catch((err) => {
         toast.error(`Login Failed due to ${err.message}`);

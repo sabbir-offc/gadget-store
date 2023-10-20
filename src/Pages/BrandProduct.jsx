@@ -20,7 +20,7 @@ const BrandProduct = ({ product }) => {
   return (
     <div
       data-aos="fade-up-right"
-      className="w-2/4 flex flex-col items-center justify-center p-5 rounded shadow-lg"
+      className="lg:w-2/4 flex flex-col items-center justify-center p-5 rounded shadow-lg"
     >
       <img
         src={image}

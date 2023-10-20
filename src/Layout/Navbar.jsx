@@ -101,8 +101,8 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <img src="/logo.png" className="w-20 h-20" alt="" />
-        <a className="font-semibold border-l-2 pl-2 border-l-blue-700 normal-case text-xl">
+        <img src="/logo.png" className="w-14 md:w-20 h-14 md:h-20" alt="" />
+        <a className="font-semibold border-l-2 pl-2 border-l-blue-700 normal-case text-xs md:text-xl">
           Gadget Store
         </a>
       </div>
@@ -141,8 +141,8 @@ const Navbar = () => {
               isPending
                 ? "pending"
                 : isActive
-                ? "px-3 py-2 text-blue-600 text-lg border-2 border-blue-600 rounded"
-                : "px-3 py-2 text-lg rounded bg-black text-white font-medium"
+                ? "px-1 md:px-3 py-1 md:py-2 text-blue-600 text-base md:text-lg border-2 border-blue-600 rounded"
+                : "px-1 md:px-3 py-1 md:py-2 text-base md:text-lg rounded bg-black text-white font-medium"
             }
             to="/signin"
           >
