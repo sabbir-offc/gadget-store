@@ -43,7 +43,7 @@ const SignUp = () => {
           userId: user?.uid,
         };
         fetch(
-          "https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/users",
+          "https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/users",
           {
             method: "POST",
             headers: {

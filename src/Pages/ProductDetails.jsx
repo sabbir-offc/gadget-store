@@ -39,7 +39,7 @@ const ProductDetails = () => {
     };
     user
       ? fetch(
-          `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/user-cart`,
+          `https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/user-cart`,
           {
             method: "POST",
             headers: {

@@ -4,7 +4,7 @@ const Feature = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     fetch(
-      "https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/products"
+      "https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/products"
     )
       .then((res) => res.json())
       .then((data) => setProducts(data));

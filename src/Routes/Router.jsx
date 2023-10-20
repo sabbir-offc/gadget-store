@@ -11,6 +11,7 @@ import Error from "../Pages/Error";
 import ProductDetails from "../Pages/ProductDetails";
 import MyCart from "../Pages/MyCart";
 import UpdateProduct from "../Pages/UpdateProduct";
+import BrandSend from "../Pages/BrandSend";
 
 const router = createBrowserRouter([
   {
@@ -44,12 +45,16 @@ const router = createBrowserRouter([
         element: <BrandProducts></BrandProducts>,
         loader: ({ params }) =>
           fetch(
-            `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/brands/${params.brand}`
+            `https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/brands/${params.brand}`
           ),
       },
       {
         path: "/ad",
-        element: <AdvertiseSend></AdvertiseSend>,
+        element: (
+          <PrivateRoutes>
+            <AdvertiseSend></AdvertiseSend>,
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/products/:id",
@@ -60,7 +65,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
+            `https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
           ),
       },
       {
@@ -72,7 +77,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/user-cart/${params.userId}`
+            `https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/user-cart/${params.userId}`
           ),
       },
       {
@@ -84,8 +89,16 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
+            `https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
           ),
+      },
+      {
+        path: "/brand-data",
+        element: (
+          <PrivateRoutes>
+            <BrandSend></BrandSend>,
+          </PrivateRoutes>
+        ),
       },
     ],
   },

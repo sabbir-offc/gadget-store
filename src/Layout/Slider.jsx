@@ -20,7 +20,7 @@ const Slider = () => {
   const [ads, setAds] = useState();
   useEffect(() => {
     fetch(
-      "https://brand-shop-server-q4h1thm4y-mdsabbirhowlader420-gmailcom.vercel.app/advertise"
+      "https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/advertise"
     )
       .then((res) => res.json())
       .then((data) => setAds(data));
