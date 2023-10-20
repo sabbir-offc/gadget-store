@@ -1,37 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 
 const UpdateProduct = () => {
-  const [formData, setFormData] = useState({
-    productType: "",
-  });
-  const [productTypes, setProductTypes] = useState([]);
-
-  // Fetch product types from the `useLoaderData` hook
   const product = useLoaderData();
+  const [productType, setProductType] = useState(product.productType);
 
-  useEffect(() => {
-    if (product) {
-      // Extract product types from the 'product' data
-      const types = product.map((item) => item.productType);
-
-      // Set the default value and product types in the state
-      setFormData({
-        ...formData,
-        productType: types[0], // Set the default value to the first item
-      });
-
-      setProductTypes(types);
-    }
-  }, [product]);
-
-  const handleProductTypeChange = (e) => {
-    setFormData({
-      ...formData,
-      productType: e.target.value,
-    });
-  };
-  const { image, productName, brandName, productType, price, rating } = product;
+  const { _id, image, productName, brandName, price, rating } = product;
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -39,9 +14,9 @@ const UpdateProduct = () => {
     const image = form.image.value;
     const productName = form.productName.value;
     const brandName = form.brandName.value;
-    const productType = formData.productType;
     const price = form.price.value;
-    const rating = formData.rating;
+    const rating = form.rating.value;
+
     const updateProduct = {
       image,
       productName,
@@ -50,6 +25,19 @@ const UpdateProduct = () => {
       price,
       rating,
     };
+    fetch(`http://localhost:5001/products/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateProduct),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Product data updated Successfull.");
+        }
+      });
   };
   return (
     <div className="my-20">
@@ -104,8 +92,8 @@ const UpdateProduct = () => {
             </div>
             <div className="col-span-full">
               <select
-                value={formData.productType}
-                onChange={handleProductTypeChange}
+                value={productType}
+                onChange={(e) => setProductType(e.target.value)}
                 className="select select-ghost w-full max-w-xs"
               >
                 <option disabled value="">

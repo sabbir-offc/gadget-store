@@ -11,7 +11,7 @@ const BrandProducts = () => {
       <div className="container mx-auto text-center">
         <Slider></Slider>
       </div>
-      {brandProducts.length > 1 ? (
+      {brandProducts.length > 0 ? (
         <div className="grid md:grid-cols-2 my-10 gap-5 place-items-center">
           {brandProducts.map((product) => (
             <BrandProduct key={product._id} product={product}></BrandProduct>
