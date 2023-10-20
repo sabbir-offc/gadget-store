@@ -8,8 +8,6 @@ import auth from "../../firebase/firebase.config";
 const SignUp = () => {
   const { createUser } = useAuth();
   const navigate = useNavigate();
-  const passwordRegex =
-    /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z0-9!@#$%^&*()_+]{6,}$/;
   const handleCreateUser = (e) => {
     e.preventDefault();
     const form = e.target;

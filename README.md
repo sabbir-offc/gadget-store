@@ -1,8 +1,29 @@
-# React + Vite
+# Gadget Store - Client-Side
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the client-side of Gadget Store! This is the frontend of our web application for selling products from various brands. Please find below an overview of our project.
 
-Currently, two official plugins are available:
+## About Gadget Store
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Gadget Store is an e-commerce platform that specializes in selling high-quality electronic products from multiple renowned brands. With our client-side application, users can explore a wide range of gadgets, view detailed product information, and seamlessly make purchases online.
+
+### Key Features
+
+- **Product Listings:** Browse through a vast catalog of electronic products from well-known brands.
+- **Product Details:** Get comprehensive information about each product, including specifications, pricing, and user reviews.
+- **Shopping Cart:** Add your favorite items to the cart and proceed to checkout with ease.
+- **User Authentication:** Create an account, sign in, or use Google authentication for a personalized shopping experience.
+- **Theme Switching:** Enjoy the website in your preferred light or dark mode with the theme toggle feature.
+
+### Live Website
+
+Visit our website live at [Your Live Client-Side Link](https://brand-shop-acfd4.web.app/).
+
+## Getting Started
+
+To run the client-side of the Gadget Store on your local machine, follow these instructions:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/programming-hero-web-course-4/b8a10-brandshop-client-side-sabbir-offc
+   ```
