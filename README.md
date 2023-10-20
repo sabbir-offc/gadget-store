@@ -16,7 +16,7 @@ Gadget Store is an e-commerce platform that specializes in selling high-quality 
 
 ### Live Website
 
-Visit our website live at [Your Live Client-Side Link](https://brand-shop-acfd4.web.app/).
+Visit our website live at [Gadget Store](https://brand-shop-acfd4.web.app/).
 
 ## Getting Started
 
