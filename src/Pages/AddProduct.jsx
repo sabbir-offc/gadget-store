@@ -42,7 +42,7 @@ const AddProduct = () => {
       rating,
     };
     fetch(
-      "https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/products",
+      "https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/products",
       {
         method: "POST",
         headers: {

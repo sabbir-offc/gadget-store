@@ -4,7 +4,7 @@ const AdvertiseSend = () => {
     const image = e.target.image.value;
     const ad = { image };
     fetch(
-      "https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/advertise/",
+      "https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/advertise/",
       {
         method: "POST",
         headers: {

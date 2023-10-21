@@ -6,12 +6,10 @@ import PropTypes from "prop-types";
 const PrivateRoutes = ({ children }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
-  console.log(location);
-  console.log(location.state);
   if (loading) {
     return (
       <div className="h-screen flex items-center justify-center">
-        <RiseLoader color="#2b2eb8" />;
+        <RiseLoader color="#2b2eb8" />
       </div>
     );
   }

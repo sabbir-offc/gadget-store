@@ -45,7 +45,7 @@ const router = createBrowserRouter([
         element: <BrandProducts></BrandProducts>,
         loader: ({ params }) =>
           fetch(
-            `https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/brands/${params.brand}`
+            `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/brands/${params.brand}`
           ),
       },
       {
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
+            `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
           ),
       },
       {
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/user-cart/${params.userId}`
+            `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/user-cart/${params.userId}`
           ),
       },
       {
@@ -89,7 +89,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
+            `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
           ),
       },
       {

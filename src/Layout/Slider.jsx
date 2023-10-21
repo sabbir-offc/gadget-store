@@ -20,7 +20,7 @@ const Slider = () => {
   const [ads, setAds] = useState();
   useEffect(() => {
     fetch(
-      "https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/advertise"
+      "https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/advertise"
     )
       .then((res) => res.json())
       .then((data) => setAds(data));
@@ -35,8 +35,6 @@ const Slider = () => {
         keyboard={true}
         autoplay={{ delay: 5000 }}
         pagination={{ clickable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
       >
         <div className="h-[20vh]">
           {ads &&

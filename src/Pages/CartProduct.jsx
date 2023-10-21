@@ -20,7 +20,7 @@ const CartProduct = ({ product, products, setProducts }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/user-cart/${user?.uid}/${id}`,
+          `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/user-cart/${user?.uid}/${id}`,
           {
             method: "DELETE",
           }

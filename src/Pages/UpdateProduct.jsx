@@ -1,9 +1,11 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 
 const UpdateProduct = () => {
   const product = useLoaderData();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [productType, setProductType] = useState(product.productType);
 
   const { _id, image, productName, brandName, price, rating } = product;
@@ -26,7 +28,7 @@ const UpdateProduct = () => {
       rating,
     };
     fetch(
-      `https://brand-shop-server-cvnfxpnzm-mdsabbirhowlader420-gmailcom.vercel.app/products/${_id}`,
+      `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/products/${_id}`,
       {
         method: "PUT",
         headers: {
@@ -37,8 +39,12 @@ const UpdateProduct = () => {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.modifiedCount > 0) {
           toast.success("Product data updated Successfull.");
+          navigate(location.state && location.state);
+        } else {
+          toast.error("Update failed, you haven't modified anything.");
         }
       });
   };

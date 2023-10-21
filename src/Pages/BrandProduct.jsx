@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Rating from "react-rating";
 const BrandProduct = ({ product }) => {
+  const location = useLocation();
   useEffect(() => {
     //aos
     AOS.init();
@@ -60,7 +61,7 @@ const BrandProduct = ({ product }) => {
             Show Details
           </button>
         </Link>
-        <Link to={`/update/${_id}`}>
+        <Link state={location.pathname} to={`/update/${_id}`}>
           <button className="bg-[#FF4B91] p-3 text-white font-semibold rounded mt-3">
             Update
           </button>
