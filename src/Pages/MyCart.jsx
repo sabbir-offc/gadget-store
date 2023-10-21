@@ -8,7 +8,7 @@ const MyCart = () => {
   return (
     <div className="my-20 container mx-auto h-full flex-grow w-full">
       {products.length > 0 ? (
-        <div className="grid lg:grid-cols-2 place-items-center  gap-5">
+        <div className="grid md:grid-cols-2 place-items-center  gap-5">
           {products &&
             products?.map((product) => (
               <CartProduct

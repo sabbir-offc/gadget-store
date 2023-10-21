@@ -69,11 +69,11 @@ const CartProduct = ({ product, products, setProducts }) => {
             readonly
           />
         </div>
-        <div className="flex justify-between mt-3 item-center">
+        <div className="flex w-full justify-between mt-3 item-center">
           <h1 className="text-xl font-bold mt-1 ">৳{price}</h1>
           <button
             onClick={() => handleDelete(_id)}
-            className="px-3 py-2 text-base font-bold bg-blue-700 text-white  rounded"
+            className="px-2 py-2 md:px-3 text-sm lg:text-base font-bold bg-blue-700 text-white  rounded"
           >
             Delete from cart
           </button>

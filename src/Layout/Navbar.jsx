@@ -52,6 +52,18 @@ const Navbar = () => {
             ? "pending"
             : isActive
             ? "px-3 py-2 text-blue-600 text-lg border-2 border-blue-600 rounded"
+            : "px-3 py-2  text-lg"
+        }
+        to="/privacy-policy"
+      >
+        Privacy & Policy
+      </NavLink>
+      <NavLink
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
+            ? "px-3 py-2 text-blue-600 text-lg border-2 border-blue-600 rounded"
             : "px-3 py-2 text-lg"
         }
         to="/add-product"

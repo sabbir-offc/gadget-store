@@ -12,6 +12,7 @@ import ProductDetails from "../Pages/ProductDetails";
 import MyCart from "../Pages/MyCart";
 import UpdateProduct from "../Pages/UpdateProduct";
 import BrandSend from "../Pages/BrandSend";
+import PrivacyPolicy from "../Pages/PrivacyPolicy";
 
 const router = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
             <BrandSend></BrandSend>,
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy></PrivacyPolicy>,
       },
     ],
   },
