@@ -1,9 +1,9 @@
+import { animateScroll as scroll } from "react-scroll";
 const Banner = () => {
-  const windowHeight = window.innerHeight;
-  const middleOfScreen = windowHeight / 2;
-  const handleScroll = () => {
-    window.scroll(0, middleOfScreen);
+  const scrollSome = () => {
+    scroll.scrollMore(500);
   };
+
   return (
     <div>
       <div className="hero bg-hero-bg bg-no-repeat min-h-[60vh]">
@@ -14,7 +14,7 @@ const Banner = () => {
               Welcom To Gadget Store
             </h1>
             <p className="mb-5">Find your favourit product in an one place.</p>
-            <button onClick={handleScroll} className="btn btn-primary">
+            <button onClick={scrollSome} className="btn btn-primary">
               Get Started
             </button>
           </div>

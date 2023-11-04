@@ -4,17 +4,18 @@ import Brand from "./Brand";
 const Brands = () => {
   const [brands, setBrands] = useState([]);
   useEffect(() => {
-    fetch(
-      "https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/brand-data"
-    )
+    fetch("https://brand-shop-server-teal.vercel.app/brand-data")
       .then((res) => res.json())
       .then((data) => setBrands(data));
   }, []);
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 mx-auto">
+    <div
+      id="brand"
+      className="grid md:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 mx-auto"
+    >
       {brands.map((brand) => (
-        <Brand key={brand.id} brand={brand}></Brand>
+        <Brand key={brand._id} brand={brand}></Brand>
       ))}
     </div>
   );

@@ -38,16 +38,13 @@ const ProductDetails = () => {
       userId: user?.uid,
     };
     user
-      ? fetch(
-          `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/user-cart`,
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(cartProduct),
-          }
-        )
+      ? fetch(`https://brand-shop-server-teal.vercel.app/user-cart`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(cartProduct),
+        })
           .then((res) => res.json())
           .then((data) => {
             if (data.acknowledged) {

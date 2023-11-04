@@ -19,9 +19,7 @@ import { useEffect, useState } from "react";
 const Slider = () => {
   const [ads, setAds] = useState();
   useEffect(() => {
-    fetch(
-      "https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/advertise"
-    )
+    fetch("https://brand-shop-server-teal.vercel.app/advertise")
       .then((res) => res.json())
       .then((data) => setAds(data));
   }, []);

@@ -2,23 +2,33 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import useAuth from "../../hook/useAuth";
 import toast from "react-hot-toast";
+import useAxios from "../../hook/useAxios";
 const Login = () => {
   const { loginUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const handleLogin = (e) => {
+  const axios = useAxios();
+  const handleLogin = async (e) => {
     e.preventDefault();
+    const toastId = toast.loading("Logging in...");
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    loginUser(email, password)
-      .then(() => {
-        toast.success("Login SuccessFull.");
-        navigate(location.state ? location.state : "/");
-      })
-      .catch((err) => {
-        toast.error(`Login Failed due to ${err.message}`);
-      });
+    try {
+      const user = await loginUser(email, password);
+      toast.success("Login SuccessFull.", { id: toastId });
+      //generate access token
+
+      axios
+        .post("/api/v1/auth/access-token", { email: user.user?.email })
+        .then((res) => {
+          if (res.data.message) {
+            navigate(location.state ? location.state : "/");
+          }
+        });
+    } catch (error) {
+      toast.error(error.message, { id: toastId });
+    }
   };
   return (
     <section>
@@ -33,6 +43,7 @@ const Login = () => {
                       Sign In
                     </h3>
                   </div>
+                  \
                 </div>
               </div>
               <form onSubmit={handleLogin}>

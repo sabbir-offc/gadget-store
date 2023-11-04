@@ -16,6 +16,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const googleProvider = new GoogleAuthProvider();
+  googleProvider.addScope("email");
   const googleLogin = () => {
     return signInWithPopup(auth, googleProvider);
   };

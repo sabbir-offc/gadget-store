@@ -1,37 +1,37 @@
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hook/useAuth";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import useAxios from "../../hook/useAxios";
 
 const SocialLogin = () => {
+  const navigate = useNavigate();
   const { googleLogin } = useAuth();
-  const handleGoogleLogin = () => {
-    googleLogin()
-      .then((res) => {
-        const user = res.user;
+  const axios = useAxios();
+
+  const handleGoogleLogin = async () => {
+    try {
+      const user = await googleLogin();
+      const currentUser = user.user;
+      if (user) {
         const userInfo = {
-          email: user?.email,
-          userName: user?.displayName,
-          image: user?.photoURL,
-          userId: user?.uid,
+          email: currentUser.email,
+          userName: currentUser.displayName,
+          image: currentUser.photoURL,
+          userId: currentUser.uid,
         };
-        fetch(
-          "https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/users",
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(userInfo),
-          }
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+        axios.post("/users", userInfo);
+        axios.post("/api/v1/auth/access-token", { email: currentUser?.email });
+
+        navigate("/");
+        toast.success("Login Successfull.");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   return (
     <div>
       <div className="relative my-4">

@@ -3,18 +3,15 @@ const AdvertiseSend = () => {
     e.preventDefault();
     const image = e.target.image.value;
     const ad = { image };
-    fetch(
-      "https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/advertise/",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(ad),
-      }
-    )
+    fetch("https://brand-shop-server-teal.vercel.app/advertise/", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(ad),
+    })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => data);
   };
   return (
     <form

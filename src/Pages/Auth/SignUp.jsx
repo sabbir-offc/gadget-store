@@ -4,18 +4,20 @@ import SocialLogin from "./SocialLogin";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase/firebase.config";
+import useAxios from "../../hook/useAxios";
 
 const SignUp = () => {
+  const axios = useAxios();
   const { createUser } = useAuth();
   const navigate = useNavigate();
-  const handleCreateUser = (e) => {
+  const handleCreateUser = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-
+    const toastId = toast.loading("Account creating...");
     if (password.length < 6) {
       return toast.error("Password must be at least 6 characters long.");
     } else if (!/[A-Z]/.test(password)) {
@@ -28,13 +30,13 @@ const SignUp = () => {
       );
     }
 
-    createUser(email, password)
-      .then((res) => {
+    try {
+      await createUser(email, password).then((res) => {
         updateProfile(auth.currentUser, {
           displayName: name,
           photoURL: photo,
         });
-        toast.success("Account Created Successfully.");
+        toast.success("Account Created Successfully.", { id: toastId });
         const user = res.user;
         const userInfo = {
           email: user?.email,
@@ -42,25 +44,14 @@ const SignUp = () => {
           image: photo,
           userId: user?.uid,
         };
-        fetch(
-          "https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/users",
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(userInfo),
-          }
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
+        axios.post("/users", userInfo);
+        axios.post("/api/v1/auth/access-token", { email: user?.email });
+
         navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
       });
+    } catch (error) {
+      toast.error(error.message, { id: toastId });
+    }
   };
   return (
     <section>

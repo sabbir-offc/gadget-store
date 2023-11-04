@@ -8,7 +8,6 @@ const Navbar = () => {
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
-
   const handleToggle = (e) => {
     if (e.target.checked) {
       setTheme("dark");
@@ -32,6 +31,7 @@ const Navbar = () => {
         toast.error("Log Out Failed.");
       });
   };
+
   const links = (
     <>
       <NavLink
@@ -58,18 +58,21 @@ const Navbar = () => {
       >
         Privacy & Policy
       </NavLink>
-      <NavLink
-        className={({ isActive, isPending }) =>
-          isPending
-            ? "pending"
-            : isActive
-            ? "px-3 py-2 text-blue-600 text-lg border-2 border-blue-600 rounded"
-            : "px-3 py-2 text-lg"
-        }
-        to="/add-product"
-      >
-        Add Product
-      </NavLink>
+      {user?.email === import.meta.env.VITE_ADMIN && (
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "px-3 py-2 text-blue-600 text-lg border-2 border-blue-600 rounded"
+              : "px-3 py-2 text-lg"
+          }
+          to="/add-product"
+        >
+          Add Product
+        </NavLink>
+      )}
+
       {user && (
         <NavLink
           className={({ isActive, isPending }) =>
@@ -79,7 +82,7 @@ const Navbar = () => {
               ? "px-3 py-2 text-blue-600 text-lg border-2 border-blue-600 rounded"
               : "px-3 py-2  text-lg"
           }
-          to={`/my-cart/${user?.uid}`}
+          to={`/my-cart`}
         >
           My Cart
         </NavLink>
@@ -87,8 +90,8 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar container mx-auto mt-5">
-      <div className="navbar-start">
+    <div className="navbar backdrop-blur rounded-b-xl z-10 mt-5 sticky top-0">
+      <div className="navbar-start ">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
@@ -126,7 +129,7 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={user.photoURL} />
+                <img src={user?.photoURL} />
               </div>
             </label>
             <ul

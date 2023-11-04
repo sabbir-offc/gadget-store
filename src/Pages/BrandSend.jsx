@@ -4,16 +4,13 @@ const BrandSend = () => {
     const title = e.target.title.value;
     const image = e.target.image.value;
     const brandData = { title, image };
-    fetch(
-      "https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/brand-data",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(brandData),
-      }
-    )
+    fetch("https://brand-shop-server-teal.vercel.app/brand-data", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(brandData),
+    })
       .then((res) => res.json())
       .then((data) => console.log(data));
   };

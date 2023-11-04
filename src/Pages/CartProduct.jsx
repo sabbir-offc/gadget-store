@@ -3,7 +3,7 @@ import Rating from "react-rating";
 import useAuth from "../hook/useAuth";
 import Swal from "sweetalert2";
 
-const CartProduct = ({ product, products, setProducts }) => {
+const CartProduct = ({ product, refetch }) => {
   const { _id, productName, image, rating, description, price } = product;
   const ratingSize = 1.5;
 
@@ -20,7 +20,7 @@ const CartProduct = ({ product, products, setProducts }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/user-cart/${user?.uid}/${id}`,
+          `https://brand-shop-server-teal.vercel.app/user-cart/${user?.uid}/${id}`,
           {
             method: "DELETE",
           }
@@ -28,8 +28,7 @@ const CartProduct = ({ product, products, setProducts }) => {
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
-              const remaining = products.filter((item) => item._id !== id);
-              setProducts(remaining);
+              refetch();
             }
           });
         Swal.fire(

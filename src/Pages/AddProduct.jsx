@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -24,14 +25,13 @@ const AddProduct = () => {
   const handleAddProduct = (e) => {
     e.preventDefault();
     const form = e.target;
-    const image = form.image.value;
     const productName = form.productName.value;
+    const image = form.image.value;
     const brandName = form.brandName.value;
     const productType = formData.productType;
     const price = form.price.value;
     const description = form.description.value;
     const rating = formData.rating;
-
     const productInfo = {
       image,
       productName,
@@ -41,23 +41,13 @@ const AddProduct = () => {
       description,
       rating,
     };
-    fetch(
-      "https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/products",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(productInfo),
+    axios.post("http://localhost:5001/products", productInfo).then((res) => {
+      const data = res.data;
+      if (data.acknowledged) {
+        toast.success("Product Added Successfull.");
+        form.reset();
       }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          toast.success("Product Added Successfull.");
-          form.reset();
-        }
-      });
+    });
   };
   return (
     <div>
@@ -77,12 +67,11 @@ const AddProduct = () => {
                   Image
                 </label>
                 <input
-                  id="image"
-                  type="text"
+                  type="file"
                   name="image"
-                  placeholder="Image"
+                  className="file-input block mt-2 file-input-bordered w-full 
+                  max-w-xs"
                   required
-                  className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
               </div>
               <div className="col-span-full sm:col-span-3">

@@ -27,19 +27,15 @@ const UpdateProduct = () => {
       price,
       rating,
     };
-    fetch(
-      `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/products/${_id}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(updateProduct),
-      }
-    )
+    fetch(`https://brand-shop-server-teal.vercel.app/products/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateProduct),
+    })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.modifiedCount > 0) {
           toast.success("Product data updated Successfull.");
           navigate(location.state && location.state);

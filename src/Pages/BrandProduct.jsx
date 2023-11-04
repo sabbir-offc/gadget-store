@@ -4,7 +4,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Rating from "react-rating";
+import useAuth from "../hook/useAuth";
 const BrandProduct = ({ product }) => {
+  const { user } = useAuth();
   const location = useLocation();
   useEffect(() => {
     //aos
@@ -61,11 +63,13 @@ const BrandProduct = ({ product }) => {
             Show Details
           </button>
         </Link>
-        <Link state={location.pathname} to={`/update/${_id}`}>
-          <button className="bg-[#FF4B91] p-3 text-white font-semibold rounded mt-3">
-            Update
-          </button>
-        </Link>
+        {user?.email === import.meta.env.VITE_ADMIN && (
+          <Link state={location.pathname} to={`/update/${_id}`}>
+            <button className="bg-[#FF4B91] p-3 text-white font-semibold rounded mt-3">
+              Update
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

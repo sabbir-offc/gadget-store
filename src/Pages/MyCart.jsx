@@ -1,21 +1,28 @@
-import { useLoaderData } from "react-router-dom";
 import CartProduct from "./CartProduct";
-import { useState } from "react";
+import useCart from "../hook/useCart";
+// import { useState } from "react";
 
+import BeatLoader from "react-spinners/BeatLoader";
 const MyCart = () => {
-  const userProduct = useLoaderData();
-  const [products, setProducts] = useState(userProduct);
+  const { loadedProducts, isLoading, refetch } = useCart();
+
+  if (isLoading) {
+    return (
+      <div className="w-full flex items-center justify-center ">
+        <BeatLoader></BeatLoader>
+      </div>
+    );
+  }
   return (
     <div className="my-20 container mx-auto h-full flex-grow w-full">
-      {products.length > 0 ? (
+      {loadedProducts?.length > 0 ? (
         <div className="grid md:grid-cols-2 place-items-center  gap-5">
-          {products &&
-            products?.map((product) => (
+          {loadedProducts &&
+            loadedProducts?.map((product) => (
               <CartProduct
                 key={product._id}
                 product={product}
-                products={products}
-                setProducts={setProducts}
+                refetch={refetch}
               ></CartProduct>
             ))}
         </div>

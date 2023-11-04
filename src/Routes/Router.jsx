@@ -13,6 +13,7 @@ import MyCart from "../Pages/MyCart";
 import UpdateProduct from "../Pages/UpdateProduct";
 import BrandSend from "../Pages/BrandSend";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -36,9 +37,9 @@ const router = createBrowserRouter([
         path: "/add-product",
 
         element: (
-          <PrivateRoutes>
+          <AdminRoute>
             <AddProduct></AddProduct>,
-          </PrivateRoutes>
+          </AdminRoute>
         ),
       },
       {
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
         element: <BrandProducts></BrandProducts>,
         loader: ({ params }) =>
           fetch(
-            `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/brands/${params.brand}`
+            `https://brand-shop-server-teal.vercel.app/brands/${params.brand}`
           ),
       },
       {
@@ -66,31 +67,27 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
+            `https://brand-shop-server-teal.vercel.app/products/${params.id}`
           ),
       },
       {
-        path: "/my-cart/:userId",
+        path: "/my-cart",
         element: (
           <PrivateRoutes>
             <MyCart></MyCart>
           </PrivateRoutes>
         ),
-        loader: ({ params }) =>
-          fetch(
-            `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/user-cart/${params.userId}`
-          ),
       },
       {
         path: "/update/:id",
         element: (
-          <PrivateRoutes>
+          <AdminRoute>
             <UpdateProduct></UpdateProduct>
-          </PrivateRoutes>
+          </AdminRoute>
         ),
         loader: ({ params }) =>
           fetch(
-            `https://brand-shop-server-1uv6sggcd-mdsabbirhowlader420-gmailcom.vercel.app/products/${params.id}`
+            `https://brand-shop-server-teal.vercel.app/products/${params.id}`
           ),
       },
       {
