@@ -1,10 +1,10 @@
 # Gadget Store - Client-Side
 
-Welcome to the client-side of Gadget Store! This is the frontend of our web application for selling products from various brands. Please find below an overview of our project.
+Welcome to the client side of Gadget Store! This is the front end of our web application for selling products from various brands. I've included for you below an overview of our project.
 
 ## About Gadget Store
 
-Gadget Store is an e-commerce platform that specializes in selling high-quality electronic products from multiple renowned brands. With our client-side application, users can explore a wide range of gadgets, view detailed product information, and seamlessly make purchases online.
+Gadget Store is an e-commerce platform specializing in selling high-quality electronic products from renowned brands. With our client-side application, users can explore various gadgets, view detailed product information, and seamlessly make purchases online.
 
 ### Key Features
 
@@ -25,5 +25,5 @@ To run the client-side of the Gadget Store on your local machine, follow these i
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/programming-hero-web-course-4/b8a10-brandshop-client-side-sabbir-offc
+   git clone https://github.com/sabbir-offc/gadget-store-client.git
    ```
