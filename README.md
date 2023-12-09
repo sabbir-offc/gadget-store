@@ -32,8 +32,9 @@ To run the client-side of the Gadget Store on your local machine, follow these i
    ```bash
    npm install
    ```
-3. Run the application:
+2. Run the application:
 
- ```bash
+   ```bash
    npm run dev
    ```
+
