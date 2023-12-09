@@ -27,3 +27,13 @@ To run the client-side of the Gadget Store on your local machine, follow these i
    ```bash
    git clone https://github.com/sabbir-offc/gadget-store-client.git
    ```
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+3. Run the application:
+
+ ```bash
+   npm run dev
+   ```
