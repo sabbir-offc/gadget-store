@@ -4,10 +4,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Rating from "react-rating";
-import useAuth from "../hook/useAuth";
+import useUserInfo from "../hook/useUserInfo";
 const BrandProduct = ({ product }) => {
-  const { user } = useAuth();
   const location = useLocation();
+  const { userInfo } = useUserInfo();
   useEffect(() => {
     //aos
     AOS.init();
@@ -63,7 +63,7 @@ const BrandProduct = ({ product }) => {
             Show Details
           </button>
         </Link>
-        {user?.email === import.meta.env.VITE_ADMIN && (
+        {userInfo?.role === "admin" && (
           <Link state={location.pathname} to={`/update/${_id}`}>
             <button className="bg-[#FF4B91] p-3 text-white font-semibold rounded mt-3">
               Update

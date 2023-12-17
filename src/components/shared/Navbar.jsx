@@ -1,10 +1,12 @@
 import toast from "react-hot-toast";
-import useAuth from "../hook/useAuth";
-import { NavLink } from "react-router-dom";
+import useAuth from "../../hook/useAuth";
+import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import useUserInfo from "../../hook/useUserInfo";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const { userInfo } = useUserInfo();
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
@@ -58,7 +60,7 @@ const Navbar = () => {
       >
         Privacy & Policy
       </NavLink>
-      {user?.email === import.meta.env.VITE_ADMIN && (
+      {userInfo?.role === "admin" && (
         <NavLink
           className={({ isActive, isPending }) =>
             isPending
@@ -138,6 +140,9 @@ const Navbar = () => {
             >
               <li>
                 <p>{user.displayName}</p>
+              </li>
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
               </li>
 
               <li>

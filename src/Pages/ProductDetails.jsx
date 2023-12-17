@@ -3,8 +3,9 @@ import Rating from "react-rating";
 import useAuth from "../hook/useAuth";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
+import { addToCart } from "../api/user";
 const ProductDetails = () => {
-  const product = useLoaderData();
+  const { data: product } = useLoaderData();
   const { user } = useAuth();
   const windowScoll = 0;
   useEffect(() => {
@@ -24,7 +25,7 @@ const ProductDetails = () => {
   const ratingSize = 1.5;
 
   //product cart button
-  const handleAddCart = () => {
+  const handleAddCart = async () => {
     const cartProduct = {
       productName,
       brandName,
@@ -37,29 +38,22 @@ const ProductDetails = () => {
       userName: user?.displayName,
       userId: user?.uid,
     };
-    user
-      ? fetch(`https://brand-shop-server-teal.vercel.app/user-cart`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(cartProduct),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.acknowledged) {
-              Swal.fire(
-                "Thank you!",
-                "Your product added successfully to your cart.",
-                "success"
-              );
-            }
-          })
-      : Swal.fire(
-          "Error!",
-          "You need to login your account for adding a product ",
-          "error"
+    if (user) {
+      const data = await addToCart(cartProduct);
+      if (data.acknowledged) {
+        Swal.fire(
+          "Thank you!",
+          "Your product added successfully to your cart.",
+          "success"
         );
+      }
+    } else {
+      Swal.fire(
+        "Error!",
+        "You need to login your account for adding a product ",
+        "error"
+      );
+    }
   };
   return (
     <div className="container mx-auto shadow-lg my-10">

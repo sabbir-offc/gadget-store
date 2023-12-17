@@ -4,10 +4,10 @@ import SocialLogin from "./SocialLogin";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase/firebase.config";
-import useAxios from "../../hook/useAxios";
+import { axiosSecure } from "../../hook/useAxios";
+
 
 const SignUp = () => {
-  const axios = useAxios();
   const { createUser } = useAuth();
   const navigate = useNavigate();
   const handleCreateUser = async (e) => {
@@ -17,7 +17,7 @@ const SignUp = () => {
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    const toastId = toast.loading("Account creating...");
+
     if (password.length < 6) {
       return toast.error("Password must be at least 6 characters long.");
     } else if (!/[A-Z]/.test(password)) {
@@ -30,25 +30,26 @@ const SignUp = () => {
       );
     }
 
+    const toastId = toast.loading("Account creating...");
     try {
-      await createUser(email, password).then((res) => {
-        updateProfile(auth.currentUser, {
-          displayName: name,
-          photoURL: photo,
-        });
-        toast.success("Account Created Successfully.", { id: toastId });
-        const user = res.user;
-        const userInfo = {
-          email: user?.email,
-          userName: name,
-          image: photo,
-          userId: user?.uid,
-        };
-        axios.post("/users", userInfo);
-        axios.post("/api/v1/auth/access-token", { email: user?.email });
-
-        navigate("/");
+      const res = await createUser(email, password);
+      await updateProfile(auth.currentUser, {
+        displayName: name,
+        photoURL: photo,
       });
+      toast.success("Account Created Successfully.", { id: toastId });
+      const user = res.user;
+      const userInfo = {
+        email: user?.email,
+        name,
+        image: photo,
+        role: "customer",
+        userId: user?.uid,
+      };
+
+      await axiosSecure.post("/auth/access-token", { email: user?.email });
+      const { data } = await axiosSecure.post("/user", userInfo);
+      if (data.acknowledged) return navigate("/");
     } catch (error) {
       toast.error(error.message, { id: toastId });
     }

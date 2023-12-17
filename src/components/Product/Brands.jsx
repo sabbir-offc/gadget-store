@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import Brand from "./Brand";
+import { axiosSecure } from "../../hook/useAxios";
 
 const Brands = () => {
   const [brands, setBrands] = useState([]);
   useEffect(() => {
-    fetch("https://brand-shop-server-teal.vercel.app/brand-data")
-      .then((res) => res.json())
-      .then((data) => setBrands(data));
+    axiosSecure.get("/brand-data").then((res) => setBrands(res.data));
   }, []);
 
   return (

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Element } from "react-scroll";
+import { axiosSecure } from "../../hook/useAxios";
 const Feature = () => {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
-    fetch("https://brand-shop-server-teal.vercel.app/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
+    axiosSecure.get("/products").then((res) => setProducts(res.data));
   }, []);
 
   return (

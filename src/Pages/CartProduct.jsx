@@ -1,14 +1,13 @@
 import PropTypes from "prop-types";
 import Rating from "react-rating";
-import useAuth from "../hook/useAuth";
 import Swal from "sweetalert2";
+import { deleteProductFromCart } from "../api/user";
 
 const CartProduct = ({ product, refetch }) => {
   const { _id, productName, image, rating, description, price } = product;
   const ratingSize = 1.5;
 
-  const { user } = useAuth();
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -17,20 +16,12 @@ const CartProduct = ({ product, refetch }) => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        fetch(
-          `https://brand-shop-server-teal.vercel.app/user-cart/${user?.uid}/${id}`,
-          {
-            method: "DELETE",
-          }
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
-              refetch();
-            }
-          });
+        const data = await deleteProductFromCart(id);
+        if (data.deletedCount > 0) {
+          refetch();
+        }
         Swal.fire(
           "Deleted!",
           "Your Product has been deleted from cart.",
@@ -85,5 +76,6 @@ CartProduct.propTypes = {
   product: PropTypes.object,
   products: PropTypes.array,
   setProducts: PropTypes.func,
+  refetch: PropTypes.func,
 };
 export default CartProduct;

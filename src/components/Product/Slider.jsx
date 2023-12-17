@@ -15,13 +15,12 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css";
 import { useEffect, useState } from "react";
+import { axiosSecure } from "../../hook/useAxios";
 
 const Slider = () => {
   const [ads, setAds] = useState();
   useEffect(() => {
-    fetch("https://brand-shop-server-teal.vercel.app/advertise")
-      .then((res) => res.json())
-      .then((data) => setAds(data));
+    axiosSecure("/advertise").then((res) => setAds(res.data));
   }, []);
 
   return (

@@ -9,6 +9,7 @@ import {
 import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import auth from "../firebase/firebase.config";
+import { axiosSecure } from "../hook/useAxios";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -38,11 +39,16 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      axiosSecure
+        .post("/auth/access-token", { email: currentUser?.email })
+        .then((res) => {
+          console.log(res.data);
+        });
     });
     return () => {
       unSubscribe();
     };
-  }, []);
+  }, [user]);
 
   const authInfo = {
     googleLogin,

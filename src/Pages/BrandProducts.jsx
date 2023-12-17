@@ -1,15 +1,17 @@
 import { Link, useLoaderData } from "react-router-dom";
 
-import Slider from "../Layout/Slider";
+import Slider from "../components/Product/Slider";
 import BrandProduct from "./BrandProduct";
 
 const BrandProducts = () => {
-  const brandProducts = useLoaderData();
+  const { data: brandProducts } = useLoaderData();
 
   return (
     <div className="container mx-auto">
       <div className="mb-10">
-        <h2 className="text-2xl font-semibold ml-5 my-8">Advertisement</h2>
+        <div className="border-l-4 border-blue-700 ml-8 px-3">
+          <h2 className="text-2xl font-semibold my-8">Advertisement</h2>
+        </div>
         <div className="mx-auto text-center">
           <Slider></Slider>
         </div>

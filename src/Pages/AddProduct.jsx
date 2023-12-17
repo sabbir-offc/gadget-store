@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { axiosSecure } from "../hook/useAxios";
 
 const AddProduct = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ const AddProduct = () => {
     });
   };
 
-  const handleAddProduct = (e) => {
+  const handleAddProduct = async (e) => {
     e.preventDefault();
     const form = e.target;
     const productName = form.productName.value;
@@ -41,17 +41,15 @@ const AddProduct = () => {
       description,
       rating,
     };
-    axios.post("http://localhost:5001/products", productInfo).then((res) => {
-      const data = res.data;
-      if (data.acknowledged) {
-        toast.success("Product Added Successfull.");
-        form.reset();
-      }
-    });
+    const { data } = await axiosSecure.post("/products", productInfo);
+    if (data.acknowledged) {
+      toast.success("Product Added Successfull.");
+      form.reset();
+    }
   };
   return (
     <div>
-      <section className="p-6 h-screen flex items-center dark:bg-gray-800 dark:text-gray-50">
+      <section className="p-6 flex items-center dark:bg-gray-800 dark:text-gray-50">
         <div className="container flex flex-col mx-auto space-y-12">
           <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900">
             <div className="space-y-2 col-span-full lg:col-span-1">
@@ -70,7 +68,7 @@ const AddProduct = () => {
                   type="file"
                   name="image"
                   className="file-input block mt-2 file-input-bordered w-full 
-                  max-w-xs"
+                  "
                   required
                 />
               </div>
@@ -87,24 +85,30 @@ const AddProduct = () => {
                   className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
               </div>
-              <div className="col-span-full sm:col-span-3">
-                <label htmlFor="brandName" className="text-sm">
-                  Brand Name
-                </label>
-                <input
-                  id="brandName"
-                  type="text"
-                  name="brandName"
-                  placeholder="Brand Name"
-                  required
-                  className="w-full p-3 rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                />
-              </div>
-              <div className="col-span-full">
+              <div className="col-span-3">
                 <select
                   value={formData.productType}
                   onChange={handleProductTypeChange}
-                  className="select select-ghost w-full max-w-xs"
+                  className="select select-ghost w-full"
+                >
+                  <option disabled value="">
+                    Product Brand
+                  </option>
+                  <option value="Apple">Apple</option>
+                  <option value="Dell">Dell</option>
+                  <option value="Intel">Intel</option>
+                  <option value="Samsung">Samsung</option>
+                  <option value="Google">Google</option>
+                  <option value="Vivo">Vivo</option>
+                  <option value="HP">HP</option>
+                  <option value="Sony">Sony</option>
+                </select>
+              </div>
+              <div className="col-span-3 my-2">
+                <select
+                  value={formData.productType}
+                  onChange={handleProductTypeChange}
+                  className="select select-ghost w-full"
                 >
                   <option disabled value="">
                     Product Type
@@ -126,7 +130,7 @@ const AddProduct = () => {
                 </label>
                 <input
                   id="price"
-                  type="text"
+                  type="number"
                   name="price"
                   placeholder="Product Price"
                   required
@@ -197,7 +201,7 @@ const AddProduct = () => {
               </div>
               <button
                 type="submit"
-                className="bg-blue-700 py-3 rounded-md font-medium"
+                className="bg-blue-700 py-3 rounded-md font-medium text-white"
               >
                 Add Product
               </button>

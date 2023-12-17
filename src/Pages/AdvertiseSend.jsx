@@ -1,9 +1,11 @@
+import { axiosSecure } from "../hook/useAxios";
+
 const AdvertiseSend = () => {
   const handleAd = (e) => {
     e.preventDefault();
     const image = e.target.image.value;
     const ad = { image };
-    fetch("https://brand-shop-server-teal.vercel.app/advertise/", {
+    axiosSecure("/advertise", {
       method: "POST",
       headers: {
         "content-type": "application/json",

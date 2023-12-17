@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { axiosSecure } from "../hook/useAxios";
 
 const UpdateProduct = () => {
   const product = useLoaderData();
@@ -27,7 +28,7 @@ const UpdateProduct = () => {
       price,
       rating,
     };
-    fetch(`https://brand-shop-server-teal.vercel.app/products/${_id}`, {
+    axiosSecure(`/products/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

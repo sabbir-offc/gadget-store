@@ -1,13 +1,16 @@
 import { useEffect } from "react";
-import Banner from "../Layout/Banner";
-import Brands from "../Layout/Brands";
-import Feature from "../Layout/Feature";
-import Testimonial from "../Layout/Testimonial";
+import Banner from "../components/Home/Banner";
+import Brands from "../components/Product/Brands";
+import Feature from "../components/Home/Feature";
+import Testimonial from "../components/Home/Testimonial";
+import useUserInfo from "../hook/useUserInfo";
 
 const Home = () => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
+  const { userInfo } = useUserInfo();
+  console.log(userInfo);
   return (
     <div>
       <Banner></Banner>

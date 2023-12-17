@@ -14,6 +14,8 @@ import UpdateProduct from "../Pages/UpdateProduct";
 import BrandSend from "../Pages/BrandSend";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import AdminRoute from "./AdminRoute";
+import { axiosSecure } from "../hook/useAxios";
+import Dashboard from "../Layout/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -45,10 +47,8 @@ const router = createBrowserRouter([
       {
         path: "/brand-products/:brand",
         element: <BrandProducts></BrandProducts>,
-        loader: ({ params }) =>
-          fetch(
-            `https://brand-shop-server-teal.vercel.app/brands/${params.brand}`
-          ),
+        loader: async ({ params }) =>
+          await axiosSecure(`/brands/${params.brand}`),
       },
       {
         path: "/ad",
@@ -65,10 +65,8 @@ const router = createBrowserRouter([
             <ProductDetails></ProductDetails>,
           </PrivateRoutes>
         ),
-        loader: ({ params }) =>
-          fetch(
-            `https://brand-shop-server-teal.vercel.app/products/${params.id}`
-          ),
+        loader: async ({ params }) =>
+          await axiosSecure(`/products/${params.id}`),
       },
       {
         path: "/my-cart",
@@ -85,10 +83,8 @@ const router = createBrowserRouter([
             <UpdateProduct></UpdateProduct>
           </AdminRoute>
         ),
-        loader: ({ params }) =>
-          fetch(
-            `https://brand-shop-server-teal.vercel.app/products/${params.id}`
-          ),
+        loader: async ({ params }) =>
+          await axiosSecure(`/products/${params.id}`),
       },
       {
         path: "/brand-data",
@@ -101,6 +97,16 @@ const router = createBrowserRouter([
       {
         path: "/privacy-policy",
         element: <PrivacyPolicy></PrivacyPolicy>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "add-product",
+        element: <AddProduct />,
       },
     ],
   },

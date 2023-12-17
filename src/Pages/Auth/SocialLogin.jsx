@@ -2,33 +2,37 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hook/useAuth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import useAxios from "../../hook/useAxios";
+import { axiosSecure } from "../../hook/useAxios";
 
 const SocialLogin = () => {
   const navigate = useNavigate();
   const { googleLogin } = useAuth();
-  const axios = useAxios();
 
   const handleGoogleLogin = async () => {
     try {
       const user = await googleLogin();
       const currentUser = user.user;
-      if (user) {
+
+      if (currentUser) {
         const userInfo = {
-          email: currentUser.email,
-          userName: currentUser.displayName,
-          image: currentUser.photoURL,
-          userId: currentUser.uid,
+          email: currentUser?.email,
+          name: currentUser?.displayName,
+          image: currentUser?.photoURL,
+          role: "customer",
+          userId: currentUser?.uid,
         };
+        console.log(userInfo);
 
-        axios.post("/users", userInfo);
-        axios.post("/api/v1/auth/access-token", { email: currentUser?.email });
-
-        navigate("/");
+        await axiosSecure.post("/auth/access-token", {
+          email: currentUser?.email,
+        });
+        const { data } = await axiosSecure.post("/user", userInfo);
+        console.log(data);
+        if (data.acknowledged) return navigate("/");
         toast.success("Login Successfull.");
       }
     } catch (err) {
-      console.log(err);
+      toast.error(err.message);
     }
   };
 

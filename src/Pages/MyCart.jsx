@@ -1,20 +1,12 @@
 import CartProduct from "./CartProduct";
 import useCart from "../hook/useCart";
-// import { useState } from "react";
-
-import BeatLoader from "react-spinners/BeatLoader";
+import Loader from "../components/Loader";
 const MyCart = () => {
   const { loadedProducts, isLoading, refetch } = useCart();
 
-  if (isLoading) {
-    return (
-      <div className="w-full flex items-center justify-center ">
-        <BeatLoader></BeatLoader>
-      </div>
-    );
-  }
+  if (isLoading) return <Loader />;
   return (
-    <div className="my-20 container mx-auto h-full flex-grow w-full">
+    <div className="my-20 container mx-auto min-h-(calc(100vh-400px)) w-full">
       {loadedProducts?.length > 0 ? (
         <div className="grid md:grid-cols-2 place-items-center  gap-5">
           {loadedProducts &&
