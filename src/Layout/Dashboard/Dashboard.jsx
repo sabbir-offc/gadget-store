@@ -1,10 +1,10 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { HiMiniDocumentPlus } from "react-icons/hi2";
 import { IoIosHome } from "react-icons/io";
 import { FaUsersCog } from "react-icons/fa";
-import { useState } from "react";
+import { IoDocuments } from "react-icons/io5";
 const Dashboard = () => {
-  const [active, setActive] = useState(false);
+  const location = useLocation();
   const menu = [
     {
       path: "/",
@@ -18,19 +18,27 @@ const Dashboard = () => {
       path: "/dashboard/manage-users",
       icon: <FaUsersCog size={25} />,
     },
+    {
+      path: "/dashboard/all-products",
+      icon: <IoDocuments size={25} />,
+    },
   ];
   return (
     <>
-      <div>
-        <div>
-          <div className="w-full container mx-auto py-5">
-            <h1>Dashboard</h1>
+      <div className="container mx-auto p-3">
+        <div className="my-5">
+          <div className="w-full container mb-5 mx-auto py-2 text-left border-l-4 px-3 border-blue-600">
+            <h1 className="text-blue-600 text-2xl font-semibold">Dashboard</h1>
           </div>
           <Outlet />
         </div>
         <div className="btm-nav">
           {menu?.map((item) => (
-            <Link to={item.path} key={item?.path}>
+            <Link
+              className={location?.pathname === item.path ? "active" : ""}
+              to={item.path}
+              key={item?.path}
+            >
               {item.icon}
             </Link>
           ))}

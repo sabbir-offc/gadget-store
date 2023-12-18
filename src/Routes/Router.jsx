@@ -3,19 +3,22 @@ import Root from "../Layout/Root";
 import Home from "../Pages/Home";
 import Login from "../Pages/Auth/Login";
 import SignUp from "../Pages/Auth/SignUp";
-import AddProduct from "../Pages/AddProduct";
 import PrivateRoutes from "./PrivateRoutes";
 import BrandProducts from "../Pages/BrandProducts";
 import AdvertiseSend from "../Pages/AdvertiseSend";
 import Error from "../Pages/Error";
 import ProductDetails from "../Pages/ProductDetails";
 import MyCart from "../Pages/MyCart";
-import UpdateProduct from "../Pages/UpdateProduct";
+import UpdateProduct from "../Pages/Dashboard/Admin/Products/UpdateProduct";
 import BrandSend from "../Pages/BrandSend";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import AdminRoute from "./AdminRoute";
 import { axiosSecure } from "../hook/useAxios";
 import Dashboard from "../Layout/Dashboard/Dashboard";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
+import AddProduct from "../Pages/Dashboard/Admin/Products/AddProduct";
+import AllProducts from "../Pages/Dashboard/Admin/Products/AllProducts";
+import { getProduct } from "../api/admin";
 
 const router = createBrowserRouter([
   {
@@ -76,16 +79,7 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
-      {
-        path: "/update/:id",
-        element: (
-          <AdminRoute>
-            <UpdateProduct></UpdateProduct>
-          </AdminRoute>
-        ),
-        loader: async ({ params }) =>
-          await axiosSecure(`/products/${params.id}`),
-      },
+
       {
         path: "/brand-data",
         element: (
@@ -106,7 +100,32 @@ const router = createBrowserRouter([
     children: [
       {
         path: "add-product",
-        element: <AddProduct />,
+        element: (
+          <AdminRoute>
+            <AddProduct />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "update/:id",
+        element: (
+          <AdminRoute>
+            <UpdateProduct></UpdateProduct>
+          </AdminRoute>
+        ),
+        loader: async ({ params }) => getProduct(params?.id),
+      },
+      {
+        path: "all-products",
+        element: <AllProducts />,
+      },
+      {
+        path: "manage-users",
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
       },
     ],
   },

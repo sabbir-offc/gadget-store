@@ -63,13 +63,6 @@ const BrandProduct = ({ product }) => {
             Show Details
           </button>
         </Link>
-        {userInfo?.role === "admin" && (
-          <Link state={location.pathname} to={`/update/${_id}`}>
-            <button className="bg-[#FF4B91] p-3 text-white font-semibold rounded mt-3">
-              Update
-            </button>
-          </Link>
-        )}
       </div>
     </div>
   );

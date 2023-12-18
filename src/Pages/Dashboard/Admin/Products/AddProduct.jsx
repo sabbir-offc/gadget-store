@@ -1,6 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { axiosSecure } from "../hook/useAxios";
+import { axiosSecure } from "../../../../hook/useAxios";
 
 const AddProduct = () => {
   const [formData, setFormData] = useState({
@@ -201,7 +201,7 @@ const AddProduct = () => {
               </div>
               <button
                 type="submit"
-                className="bg-blue-700 py-3 rounded-md font-medium text-white"
+                className="bg-blue-700 py-3 rounded-md font-medium text-white col-span-full"
               >
                 Add Product
               </button>

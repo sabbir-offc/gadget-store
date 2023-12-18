@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
-import { axiosSecure } from "../hook/useAxios";
+import { axiosSecure } from "../../../../hook/useAxios";
 
 const UpdateProduct = () => {
   const product = useLoaderData();

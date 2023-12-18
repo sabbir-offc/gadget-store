@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase/firebase.config";
 import { axiosSecure } from "../../hook/useAxios";
 
-
 const SignUp = () => {
   const { createUser } = useAuth();
   const navigate = useNavigate();
