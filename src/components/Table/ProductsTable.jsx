@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
-const ProductsTable = ({ item }) => {
+import { RiEditBoxFill, RiDeleteBin6Fill } from "react-icons/ri";
+const ProductsTable = ({ item, handleDelete }) => {
   const { image, productName, brandName, productType, rating, _id } = item;
   return (
     <tr>
@@ -30,17 +30,19 @@ const ProductsTable = ({ item }) => {
       <td className="whitespace-nowrap px-4 py-4 capitalize text-sm text-gray-700">
         {rating}
       </td>
-      <td className="whitespace-nowrap px-4 py-4 text-center text-sm font-medium">
+      <td className="whitespace-nowrap flex items-center justify-center gap-2 px-4 py-4 text-center text-sm font-medium">
         <Link state={location.pathname} to={`/dashboard/update/${_id}`}>
-          <button className="bg-[#FF4B91] p-3 text-white font-semibold rounded mt-3">
-            Update
-          </button>
+          <RiEditBoxFill size={26} color="green" />
         </Link>
+        <button className="" onClick={() => handleDelete(_id)}>
+          <RiDeleteBin6Fill size={26} color="red" />
+        </button>
       </td>
     </tr>
   );
 };
 ProductsTable.propTypes = {
   item: PropTypes.object,
+  handleDelete: PropTypes.func,
 };
 export default ProductsTable;

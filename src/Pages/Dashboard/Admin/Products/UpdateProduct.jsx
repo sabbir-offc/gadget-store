@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
-import { axiosSecure } from "../../../../hook/useAxios";
+import { updateProduct } from "../../../../api/admin";
 
 const UpdateProduct = () => {
   const product = useLoaderData();
@@ -11,7 +11,7 @@ const UpdateProduct = () => {
 
   const { _id, image, productName, brandName, price, rating } = product;
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const form = e.target;
     const image = form.image.value;
@@ -20,7 +20,7 @@ const UpdateProduct = () => {
     const price = form.price.value;
     const rating = form.rating.value;
 
-    const updateProduct = {
+    const updatedProduct = {
       image,
       productName,
       brandName,
@@ -28,22 +28,13 @@ const UpdateProduct = () => {
       price,
       rating,
     };
-    axiosSecure(`/products/${_id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateProduct),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount > 0) {
-          toast.success("Product data updated Successfull.");
-          navigate(location.state && location.state);
-        } else {
-          toast.error("Update failed, you haven't modified anything.");
-        }
-      });
+    const data = await updateProduct(_id, updatedProduct);
+    if (data.modifiedCount > 0) {
+      toast.success("Product data updated Successfull.");
+      navigate(location.state && location.state);
+    } else {
+      toast.error("Update failed, you haven't modified anything.");
+    }
   };
   return (
     <div className="my-20">

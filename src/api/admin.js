@@ -15,3 +15,15 @@ export const getProduct = async (id) => {
     const { data } = await axiosSecure(`/products/${id}`);
     return data
 }
+
+//update product details
+export const updateProduct = async (id, info) => {
+    const { data } = await axiosSecure.put(`/products/${id}`, info);
+    return data
+}
+
+//delete single product 
+export const deleteProduct = async (id) => {
+    const { data } = await axiosSecure.delete(`/product/delete/${id}`)
+    return data;
+}

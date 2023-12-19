@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllProducts } from "../../../../api/admin";
+import { deleteProduct, getAllProducts } from "../../../../api/admin";
 import ProductsTable from "../../../../components/Table/ProductsTable";
 
 const AllProducts = () => {
@@ -10,6 +10,12 @@ const AllProducts = () => {
       return await data;
     },
   });
+
+  const handleDelete = async (id) => {
+    const data = await deleteProduct(id);
+    console.log(data);
+  };
+
   return (
     <>
       <section className="mx-auto w-full max-w-7xl px-4 py-4">
@@ -67,13 +73,17 @@ const AllProducts = () => {
                         scope="col"
                         className="relative text-center px-4 py-3.5 font-normal"
                       >
-                        Edit
+                        Action
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
                     {products.map((item) => (
-                      <ProductsTable key={item._id} item={item} />
+                      <ProductsTable
+                        handleDelete={handleDelete}
+                        key={item._id}
+                        item={item}
+                      />
                     ))}
                   </tbody>
                 </table>
