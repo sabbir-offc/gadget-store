@@ -104,7 +104,7 @@ const ProductDetails = () => {
       </div>
 
       <div className="px-5 py-3 mt-5">
-        <p className="text-xl font-bold mb-4">Description:</p>
+        <p className="text-xl font-bold mb-4 whitespace-nowrap">Description:</p>
         <p className="text-lg">{description}</p>
       </div>
     </div>

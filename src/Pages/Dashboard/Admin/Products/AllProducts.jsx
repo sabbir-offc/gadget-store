@@ -1,21 +1,74 @@
 import { useQuery } from "@tanstack/react-query";
 import { deleteProduct, getAllProducts } from "../../../../api/admin";
 import ProductsTable from "../../../../components/Table/ProductsTable";
+import { useEffect, useState } from "react";
+import DeleteModal from "../../../../components/Modal/ProductDeleteModal";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import Loader from "../../../../components/Loader";
+import { axiosSecure } from "../../../../hook/useAxios";
 
 const AllProducts = () => {
-  const { data: products = [] } = useQuery({
-    queryKey: ["products"],
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [count, setCount] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemPerPage = 10;
+  useEffect(() => {
+    axiosSecure("/productsCount").then((res) => setCount(res.data.count));
+  }, []);
+
+  // const numberOfPages = [Array]
+  const totalPage = Math.ceil(count / itemPerPage);
+  const pages = [...Array(totalPage).keys()];
+
+  const {
+    data: products = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["products", currentPage, itemPerPage],
     queryFn: async () => {
-      const data = await getAllProducts();
+      const data = await getAllProducts(currentPage, itemPerPage);
       return await data;
     },
   });
+  if (isLoading) return <Loader />;
 
-  const handleDelete = async (id) => {
-    const data = await deleteProduct(id);
-    console.log(data);
+  const handleDelete = (id) => {
+    setSelectedProductId(id);
+    setIsDeleteModalOpen(true);
   };
 
+  const handleConfirmDelete = async () => {
+    try {
+      const data = await deleteProduct(selectedProductId);
+      console.log(data);
+      if (data.deletedCount > 0) {
+        refetch();
+        toast.success("Product deleted successfully");
+      }
+      setIsDeleteModalOpen(false);
+    } catch (error) {
+      toast.error("Error deleting product:", error);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setSelectedProductId(null);
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleRight = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+  const handleLeft = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
   return (
     <>
       <section className="mx-auto w-full max-w-7xl px-4 py-4">
@@ -28,12 +81,14 @@ const AllProducts = () => {
             </p>
           </div>
           <div>
-            <button
-              type="button"
-              className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            >
-              Add new Product
-            </button>
+            <Link to={"/dashboard/add-product"}>
+              <button
+                type="button"
+                className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                Add new Product
+              </button>
+            </Link>
           </div>
         </div>
         <div className="mt-6 flex flex-col">
@@ -61,6 +116,12 @@ const AllProducts = () => {
                         className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
                       >
                         Product Type
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
+                        Price
                       </th>
 
                       <th
@@ -92,43 +153,48 @@ const AllProducts = () => {
           </div>
         </div>
         <div className="flex items-center justify-center pt-6">
-          <a
-            href="#"
-            className="mx-1 cursor-not-allowed text-sm font-semibold text-gray-900"
+          <button
+            onClick={handleLeft}
+            className={`mx-1 ${
+              currentPage === 0 ? "cursor-not-allowed" : "cursor-pointer"
+            } text-sm font-semibold text-gray-900`}
           >
             <span className="hidden lg:block">&larr; Previous</span>
             <span className="block lg:hidden">&larr;</span>
-          </a>
-          <a
-            href="#"
-            className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
+          </button>
+          {pages?.map((item, idx) => (
+            <button
+              key={item}
+              onClick={() => setCurrentPage(item)}
+              className={`mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105 ${
+                item === currentPage
+                  ? "bg-blue-600 text-white font-semibold"
+                  : ""
+              }`}
+            >
+              {idx + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={handleRight}
+            className={`mx-2 ${
+              currentPage === pages.length - 1 ? "cursor-not-allowed" : ""
+            } text-sm font-semibold text-gray-900`}
           >
-            1
-          </a>
-          <a
-            href="#"
-            className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
-          >
-            2
-          </a>
-          <a
-            href="#"
-            className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
-          >
-            3
-          </a>
-          <a
-            href="#"
-            className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
-          >
-            4
-          </a>
-          <a href="#" className="mx-2 text-sm font-semibold text-gray-900">
             <span className="hidden lg:block">Next &rarr;</span>
             <span className="block lg:hidden">&rarr;</span>
-          </a>
+          </button>
         </div>
       </section>
+      {isDeleteModalOpen && (
+        <DeleteModal
+          isOpen={isDeleteModalOpen}
+          setIsOpen={setIsDeleteModalOpen}
+          handleConfirm={handleConfirmDelete}
+          handleCancel={handleCancelDelete}
+        />
+      )}
     </>
   );
 };

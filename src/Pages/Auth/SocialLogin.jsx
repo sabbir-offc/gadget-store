@@ -20,12 +20,8 @@ const SocialLogin = () => {
           image: currentUser?.photoURL,
           role: "customer",
           userId: currentUser?.uid,
+          status: "active",
         };
-        console.log(userInfo);
-
-        await axiosSecure.post("/auth/access-token", {
-          email: currentUser?.email,
-        });
         const { data } = await axiosSecure.post("/user", userInfo);
         console.log(data);
         if (data.acknowledged) return navigate("/");

@@ -2,7 +2,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { RiEditBoxFill, RiDeleteBin6Fill } from "react-icons/ri";
 const ProductsTable = ({ item, handleDelete }) => {
-  const { image, productName, brandName, productType, rating, _id } = item;
+  const { image, price, productName, brandName, productType, rating, _id } =
+    item;
   return (
     <tr>
       <td className="whitespace-nowrap px-4 py-4">
@@ -26,6 +27,9 @@ const ProductsTable = ({ item, handleDelete }) => {
         <span className="inline-flex capitalize rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
           {productType}
         </span>
+      </td>
+      <td className="whitespace-nowrap px-4 py-4 capitalize text-sm text-gray-700">
+        <span className="text-xl">৳</span> {price}
       </td>
       <td className="whitespace-nowrap px-4 py-4 capitalize text-sm text-gray-700">
         {rating}

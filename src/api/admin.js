@@ -1,13 +1,14 @@
-
-
-//upload image
-
 import { axiosSecure } from "../hook/useAxios"
 
 //get all products
-export const getAllProducts = async () => {
-    const { data } = await axiosSecure('/products');
-    return data;
+export const getAllProducts = async (currentPage, itemPerPage) => {
+    if (currentPage || itemPerPage) {
+        const { data } = await axiosSecure(`/products?page=${currentPage}&size=${itemPerPage}`);
+        return data;
+    } else {
+        const { data } = await axiosSecure(`/products`);
+        return data;
+    }
 }
 
 //get single product data;
@@ -27,3 +28,4 @@ export const deleteProduct = async (id) => {
     const { data } = await axiosSecure.delete(`/product/delete/${id}`)
     return data;
 }
+

@@ -28,7 +28,11 @@ const Dashboard = () => {
       <div className="container mx-auto p-3">
         <div className="mt-5 mb-14">
           <div className="w-full container mb-5 mx-auto py-2 text-left border-l-4 px-3 border-blue-600">
-            <h1 className="text-blue-600 text-2xl font-semibold">Dashboard</h1>
+            <Link to={"/dashboard"}>
+              <h1 className="text-blue-600 text-2xl font-semibold">
+                Dashboard
+              </h1>
+            </Link>
           </div>
           <Outlet />
         </div>

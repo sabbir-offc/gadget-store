@@ -38,12 +38,12 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
       axiosSecure
         .post("/auth/access-token", { email: currentUser?.email })
         .then((res) => {
           console.log(res.data);
         });
+      setLoading(false);
     });
     return () => {
       unSubscribe();

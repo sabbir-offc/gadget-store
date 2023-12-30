@@ -44,6 +44,7 @@ const SignUp = () => {
         image: photo,
         role: "customer",
         userId: user?.uid,
+        status: "active",
       };
 
       await axiosSecure.post("/auth/access-token", { email: user?.email });
