@@ -1,11 +1,14 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { RiEditBoxFill, RiDeleteBin6Fill } from "react-icons/ri";
-const ProductsTable = ({ item, handleDelete }) => {
+const ProductsTable = ({ item, handleDelete, idx }) => {
   const { image, price, productName, brandName, productType, rating, _id } =
     item;
   return (
     <tr>
+      <td className="whitespace-nowrap px-4 py-4 capitalize text-sm text-gray-700">
+        <div className="text-sm text-gray-700">{idx + 1}</div>
+      </td>
       <td className="whitespace-nowrap px-4 py-4">
         <div className="flex items-center">
           <div className="h-10 w-10 flex-shrink-0">

@@ -15,21 +15,21 @@ const UpdateProduct = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const image = form.image.value;
-    const productName = form.productName.value;
-    const brandName = form.brandName.value;
-    const price = form.price.value;
-    const rating = form.rating.value;
-    const description = form.description.value;
+    const upImage = form.image.value;
+    const upProductName = form.productName.value;
+    const upBrandName = form.brandName.value;
+    const upPrice = form.price.value;
+    const upRating = form.rating.value;
+    const upDescription = form.description.value;
 
     const updatedProduct = {
-      image,
-      productName,
-      brandName,
+      image: upImage,
+      productName: upProductName,
+      brandName: upBrandName,
       productType,
-      price,
-      description,
-      rating,
+      price: upPrice,
+      description: upDescription,
+      rating: upRating,
     };
     console.log(updatedProduct);
     const data = await updateProduct(_id, updatedProduct);

@@ -102,6 +102,12 @@ const AllProducts = () => {
                         scope="col"
                         className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
                       >
+                        <span>Seriul</span>
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
                         <span>Product</span>
                       </th>
                       <th
@@ -139,8 +145,9 @@ const AllProducts = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {products.map((item) => (
+                    {products.map((item, idx) => (
                       <ProductsTable
+                        idx={idx}
                         handleDelete={handleDelete}
                         key={item._id}
                         item={item}

@@ -90,7 +90,10 @@ const ProductDetails = () => {
             Brand:
             <span className="font-bold"> {brandName}</span>
           </p>
-          <p className="text-lg text-blue-400 font-bold">৳ {price}</p>
+          <p className="text-lg">
+            Price:
+            <span className="text-lg text-blue-400 font-bold"> ৳ {price}</span>
+          </p>
           <p className="text-lg">
             Category: <span className="font-medium">{productType}</span>
           </p>
