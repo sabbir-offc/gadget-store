@@ -6,6 +6,7 @@ const AddProduct = () => {
   const [formData, setFormData] = useState({
     rating: "",
     productType: "",
+    brandName: "",
   });
   const handleRatingChange = (e) => {
     const value = e.target.value;
@@ -21,17 +22,25 @@ const AddProduct = () => {
       productType: value,
     });
   };
+  const handleBrandName = (e) => {
+    const value = e.target.value;
+    setFormData({
+      ...formData,
+      brandName: value,
+    });
+  };
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
     const form = e.target;
     const productName = form.productName.value;
     const image = form.image.value;
-    const brandName = form.brandName.value;
+    const brandName = formData.brandName;
     const productType = formData.productType;
     const price = form.price.value;
     const description = form.description.value;
     const rating = formData.rating;
+
     const productInfo = {
       image,
       productName,
@@ -41,11 +50,12 @@ const AddProduct = () => {
       description,
       rating,
     };
-    const { data } = await axiosSecure.post("/products", productInfo);
-    if (data.acknowledged) {
-      toast.success("Product Added Successfull.");
-      form.reset();
-    }
+    console.log(productInfo);
+    // const { data } = await axiosSecure.post("/products", productInfo);
+    // if (data.acknowledged) {
+    // toast.success("Product Added Successful.");
+    // form.reset();
+    // }
   };
   return (
     <div>
@@ -88,7 +98,7 @@ const AddProduct = () => {
               <div className="col-span-3">
                 <select
                   value={formData.productType}
-                  onChange={handleProductTypeChange}
+                  onChange={handleBrandName}
                   className="select select-ghost w-full"
                 >
                   <option disabled value="">

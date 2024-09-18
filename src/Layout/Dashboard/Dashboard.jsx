@@ -1,10 +1,14 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 import { HiMiniDocumentPlus } from "react-icons/hi2";
 import { IoIosHome } from "react-icons/io";
 import { FaUsersCog } from "react-icons/fa";
 import { IoDocuments } from "react-icons/io5";
+import useUserInfo from "../../hook/useUserInfo";
 const Dashboard = () => {
   const location = useLocation();
+  const { userInfo } = useUserInfo();
+  console.log(userInfo);
+  if (userInfo?.role !== "admin") return <Navigate to={"/"} />;
   const menu = [
     {
       path: "/",

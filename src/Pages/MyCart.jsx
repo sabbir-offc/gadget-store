@@ -5,19 +5,33 @@ const MyCart = () => {
   const { loadedProducts, isLoading, refetch } = useCart();
 
   if (isLoading) return <Loader />;
+
+  const allPrice = loadedProducts.reduce(
+    (acc, curr) => acc + Number(curr.price.replace(/,/g, "")),
+    0
+  );
+  console.log(allPrice);
+
   return (
     <div className="my-20 container mx-auto min-h-(calc(100vh-400px)) w-full">
       {loadedProducts?.length > 0 ? (
-        <div className="grid md:grid-cols-2 place-items-center  gap-5">
-          {loadedProducts &&
-            loadedProducts?.map((product) => (
-              <CartProduct
-                key={product._id}
-                product={product}
-                refetch={refetch}
-              ></CartProduct>
-            ))}
-        </div>
+        <>
+          <div className="w-full flex justify-end mb-3">
+            <button className="px-3 py-2 bg-blue-700 text-white font-semibold rounded-md">
+              Pay ৳ {allPrice}
+            </button>
+          </div>
+          <div className="grid md:grid-cols-2 place-items-center  gap-5">
+            {loadedProducts &&
+              loadedProducts?.map((product) => (
+                <CartProduct
+                  key={product._id}
+                  product={product}
+                  refetch={refetch}
+                ></CartProduct>
+              ))}
+          </div>
+        </>
       ) : (
         <section className=" px-5 py-12 lg:px-20">
           <div className="w-full text-blue-600 border rounded-lg shadow-xl">

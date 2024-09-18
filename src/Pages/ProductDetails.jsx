@@ -55,6 +55,7 @@ const ProductDetails = () => {
       );
     }
   };
+
   return (
     <div className="container mx-auto shadow-lg my-10">
       <div className="grid md:grid-cols-5 py-5 rounded-md">
@@ -108,7 +109,7 @@ const ProductDetails = () => {
 
       <div className="px-5 py-3 mt-5">
         <p className="text-xl font-bold mb-4 whitespace-nowrap">Description:</p>
-        <p className="text-lg">{description}</p>
+        <p className="text-lg ">{description}</p>
       </div>
     </div>
   );

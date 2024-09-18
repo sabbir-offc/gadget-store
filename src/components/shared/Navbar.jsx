@@ -7,6 +7,7 @@ import useUserInfo from "../../hook/useUserInfo";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const { userInfo } = useUserInfo();
+  console.log(userInfo);
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
@@ -126,9 +127,11 @@ const Navbar = () => {
               <li>
                 <p>{user.displayName}</p>
               </li>
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
+              {userInfo?.role === "admin" && (
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
+              )}
 
               <li>
                 <button
